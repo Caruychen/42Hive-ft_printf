@@ -6,7 +6,7 @@
 #    By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 15:25:42 by cchen             #+#    #+#              #
-#    Updated: 2022/02/15 18:02:50 by cchen            ###   ########.fr        #
+#    Updated: 2022/02/15 19:50:54 by cchen            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,8 @@ CC := gcc
 CFLAGS := -c -Wall -Werror -Wextra
 INCLUDES := -I./libft -I./includes
 
-SRC_DIR := src
-OBJ_DIR := obj
+SRC_DIR := ./src
+OBJ_DIR := ./obj
 SRCS := ./src/$(EXE).c
 OBJS := $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 HEADER := $(SRC_DIR)/$(EXE).h
