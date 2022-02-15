@@ -6,7 +6,7 @@
 #    By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/01 15:25:03 by cchen             #+#    #+#              #
-#    Updated: 2022/02/15 15:23:39 by cchen            ###   ########.fr        #
+#    Updated: 2022/02/15 18:18:51 by cchen            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ $(NAME): $(OBJS)
 	ar -rcs $(NAME) $^
 
 clean:
-	@rm -rf $(OBJ_DIR)
+	@rm -rf $(OBJS)
 
 fclean: clean
 	@rm -f $(NAME)
