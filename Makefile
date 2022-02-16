@@ -6,7 +6,7 @@
 #    By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 15:25:42 by cchen             #+#    #+#              #
-#    Updated: 2022/02/15 19:50:54 by cchen            ###   ########.fr        #
+#    Updated: 2022/02/16 13:39:49 by cchen            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,13 +19,13 @@ INCLUDES := -I./libft -I./includes
 
 SRC_DIR := ./src
 OBJ_DIR := ./obj
-SRCS := ./src/$(EXE).c
+SRCS := ./src/$(EXE).c ./src/ft_vfprintf.c
 OBJS := $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 HEADER := $(SRC_DIR)/$(EXE).h
 
 LIB_DIR := libft
 LIBFT := $(addprefix $(LIB_DIR), libft.a)
-LIB_OBJS := $(shell find $(LIB_DIR) -type f | grep -E "\.o$$")
+LIB_OBJS = $(shell find $(LIB_DIR) -type f | grep -E "\.o$$")
 
 .PHONY: all clean fclean re
 
