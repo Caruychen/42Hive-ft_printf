@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   vec_append_str.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/10 12:54:33 by cchen             #+#    #+#             */
-/*   Updated: 2022/01/22 18:53:14 by cchen            ###   ########.fr       */
+/*   Created: 2022/02/17 13:42:50 by cchen             #+#    #+#             */
+/*   Updated: 2022/02/17 13:43:29 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "vec.h"
+#include "ft_string.h"
 
-# define BUFF_SIZE 256
-# define FD_MAX 8192
-# define RESIZE_FACTOR 2
+int	vec_append_str(t_vec *dst, const void *src)
+{
+	size_t	n;
 
-# include <unistd.h>
-# include "vec.h"
-# include "ft_string.h"
+	n = ft_strlen(src);
+	return (vec_append_strn(dst, src, n));
+}
 
-int	get_next_line(const int fd, char **line);
 
-#endif
