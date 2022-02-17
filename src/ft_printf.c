@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 18:03:29 by cchen             #+#    #+#             */
-/*   Updated: 2022/02/16 14:21:10 by cchen            ###   ########.fr       */
+/*   Updated: 2022/02/17 10:49:18 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,14 @@
 int	ft_printf(const char *format, ...)
 {
 	va_list	ap;
-	int		done;
+	char	*ret;
+	int		len;
 
 	va_start(ap, format);
-	done = ft_vdprintf(1, format, ap);
+	len = ft_vasprintf(&ret, format, ap);
 	va_end(ap);
+	if (len != -1)
+		write(1, ret, len);
+	free(ret);
 	return (done);
 }
