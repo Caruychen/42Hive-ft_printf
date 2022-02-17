@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:11:46 by cchen             #+#    #+#             */
-/*   Updated: 2022/02/17 14:18:29 by cchen            ###   ########.fr       */
+/*   Updated: 2022/02/17 17:36:01 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,17 @@ int	parse_signed_int(t_vec *result, int n)
 	return (length);
 }
 
+int	parse_hex(t_vec *result, int n)
+{
+	int		length;
+	char	*s;
+
+	s = ft_ultoa(n, 16);
+	length = parse_string(result, s);
+	free(s);
+	return (length);
+}
+
 int	parse_conversion(t_vec *result, const char **format, va_list ap)
 {
 	if (**format == 'c')
@@ -45,6 +56,10 @@ int	parse_conversion(t_vec *result, const char **format, va_list ap)
 		parse_signed_int(result, va_arg(ap, int));
 	if (**format == 's')
 		parse_string(result, va_arg(ap, char *));
+	if (**format == 'x')
+		parse_hex(result, va_arg(ap, int)); 
+	if (**format == 'X')
+		parse_hex(result, va_arg(ap, int)); 
 	(*format)++;
 	return (result->len);
 }
