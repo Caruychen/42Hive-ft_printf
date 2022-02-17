@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 13:39:23 by cchen             #+#    #+#             */
-/*   Updated: 2022/02/17 11:08:54 by cchen            ###   ########.fr       */
+/*   Updated: 2022/02/17 13:42:25 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,76 +14,48 @@
 #include <stdarg.h>
 #include "libft.h"
 
-int	parse_char(int fd, int c)
+int	vec_append_str(t_vec *dst, const void *src)
 {
-	ft_putchar_fd((char) c, fd);
+	size_t	n;
+
+	n = ft_strlen(src);
+	return (vec_append_strn(dst, src, n));
+}
+
+int	parse_char(t_vec *result, int c)
+{
+	vec_append_strn(result, &c, 1);
 	return (1);
 }
 
-int	parse_string(int fd, const char *s)
+int	parse_string(t_vec *result, const char *s)
 {
-	int	length;
-
-	length = 0;
 	if (s == NULL)
-	{
-		ft_putstr_fd("(null)", fd);
-		return (0);
-	}
-	while (s[length])
-		++length;
-	write(fd, s, length);
-	return (length);
+		return (vec_append_str(result, "(null)"));
+	return (vec_append_str(result, s));
 }
 
-int	parse_signed_int(int fd, int n)
+int	parse_signed_int(t_vec *result, int n)
 {
 	int		length;
 	char	*s;
 
 	s = ft_itoa(n);
-	length = parse_string(fd, s);
+	length = parse_string(result, s);
 	free(s);
 	return (length);
 }
 
-int	parse_conversion(t_vec result, const char **format, va_list ap)
+int	parse_conversion(t_vec *result, const char **format, va_list ap)
 {
-	int	length;
-
-	length = 0;
 	if (**format == 'c')
-		length = parse_char(result, va_arg(ap, int));
+		parse_char(result, va_arg(ap, int));
 	if (**format == 'd' || **format == 'i')
-		length = parse_signed_int(fd, va_arg(ap, int));
+		parse_signed_int(result, va_arg(ap, int));
 	if (**format == 's')
-		length = parse_string(fd, va_arg(ap, char *));
+		parse_string(result, va_arg(ap, char *));
 	(*format)++;
-	return (length);
-}
-
-int	vec_append_n(t_vec *dst, const void *src, size_t n)
-{
-	size_t	new_size;
-	int		ret;
-
-	if (!dst || !src)
-		return (-1);
-	if (!dst->memory)
-		vec_new(dst, 1, dst->elem_size);
-	new_size = (dst->len + n) * dst->elem_size;
-	if (dst->alloc_size < new_size)
-	{
-		if (dst->alloc_size * 2 < new_size)
-			ret = vec_resize(dst, new_size);
-		else
-			ret = vec_resize(dst, dst->alloc_size * 2);
-		if (ret < 0)
-			return (-1);
-	}
-	ft_memcpy(&dst->memory[dst->elem_size * dst->len], src, n * dst->elem_size);
-	dst->len += n;
-	return (1);
+	return (result->len);
 }
 
 int	ft_vasprintf(char **ret, const char *format, va_list ap)
@@ -98,10 +70,13 @@ int	ft_vasprintf(char **ret, const char *format, va_list ap)
 	{
 		if (*p++ == '%')
 		{
-			vec_append_n(&result, format, p - format);
+			if (vec_append_strn(&result, format, (p - 1) - format) < 0)
+				return (-1);
 			parse_conversion(&result, &p, ap);
 			format = p;
 		}
 	}
+	vec_append_strn(&result, format, p - format);
+	*ret = result.memory;
 	return (result.len);
 }

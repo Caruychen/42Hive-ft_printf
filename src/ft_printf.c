@@ -6,11 +6,13 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 18:03:29 by cchen             #+#    #+#             */
-/*   Updated: 2022/02/17 10:49:18 by cchen            ###   ########.fr       */
+/*   Updated: 2022/02/17 13:28:49 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <unistd.h>
+#include <stdlib.h>
 
 int	ft_printf(const char *format, ...)
 {
@@ -24,5 +26,5 @@ int	ft_printf(const char *format, ...)
 	if (len != -1)
 		write(1, ret, len);
 	free(ret);
-	return (done);
+	return (len);
 }
