@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 13:39:23 by cchen             #+#    #+#             */
-/*   Updated: 2022/02/17 10:53:33 by cchen            ###   ########.fr       */
+/*   Updated: 2022/02/17 11:08:54 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,13 @@ int	parse_signed_int(int fd, int n)
 	return (length);
 }
 
-int	parse_conversion(int fd, const char **format, va_list ap)
+int	parse_conversion(t_vec result, const char **format, va_list ap)
 {
 	int	length;
 
 	length = 0;
 	if (**format == 'c')
-		length = parse_char(fd, va_arg(ap, int));
+		length = parse_char(result, va_arg(ap, int));
 	if (**format == 'd' || **format == 'i')
 		length = parse_signed_int(fd, va_arg(ap, int));
 	if (**format == 's')
@@ -99,6 +99,7 @@ int	ft_vasprintf(char **ret, const char *format, va_list ap)
 		if (*p++ == '%')
 		{
 			vec_append_n(&result, format, p - format);
+			parse_conversion(&result, &p, ap);
 			format = p;
 		}
 	}
