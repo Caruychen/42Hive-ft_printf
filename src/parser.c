@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:11:46 by cchen             #+#    #+#             */
-/*   Updated: 2022/02/18 11:30:26 by cchen            ###   ########.fr       */
+/*   Updated: 2022/02/18 11:58:21 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,24 +48,16 @@ int	parse_uint(t_vec *result, int n, int base, int uppercase)
 	return (length);
 }
 
-int	parse_octal(t_vec *result, int n)
+int	parse_ptr(t_vec *result, uintptr_t ptr)
 {
-	int		length;
+	int	length;
+	char	*x_str;
 	char	*s;
 
-	s = ft_uitoa(n, 8, 0);
+	x_str = ft_ultoa(ptr, 16, FALSE);
+	s = ft_strjoin("0x", x_str);
 	length = parse_string(result, s);
-	free(s);
-	return (length);
-}
-
-int	parse_hex(t_vec *result, int n, int uppercase)
-{
-	int		length;
-	char	*s;
-
-	s = ft_uitoa(n, 16, uppercase);
-	length = parse_string(result, s);
+	free(x_str);
 	free(s);
 	return (length);
 }
@@ -86,6 +78,8 @@ int	parse_conversion(t_vec *result, const char **format, va_list ap)
 		parse_uint(result, va_arg(ap, int), 16, FALSE);
 	if (**format == 'X')
 		parse_uint(result, va_arg(ap, int), 16, TRUE);
+	if (**format == 'p')
+		parse_ptr(result, va_arg(ap, uintptr_t));
 	(*format)++;
 	return (result->len);
 }
