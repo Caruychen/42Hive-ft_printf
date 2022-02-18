@@ -1,38 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ultoa.c                                         :+:      :+:    :+:   */
+/*   ft_uitoa.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/17 16:31:14 by cchen             #+#    #+#             */
-/*   Updated: 2022/02/18 10:24:06 by cchen            ###   ########.fr       */
+/*   Created: 2022/02/18 10:05:46 by cchen             #+#    #+#             */
+/*   Updated: 2022/02/18 10:08:16 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdint.h>
-#include "ft_string.h"
 #include "ft_stdlib.h"
 
-char	*ft_ultoa(uintmax_t value, int base)
+char	*ft_uitoa(unsigned int value, int base)
 {
-	char	tmp[MAX_LL_STR_SIZE];
-	char	*res;
-	int		index;
-
 	if (base < 2 || base > 16)
 		return (NULL);
-	index = MAX_LL_STR_SIZE - 1;
-	tmp[index--] = '\0';
-	while (value > 0)
-	{
-		tmp[index--] = HEX_CONV_STR[value % base];
-		value /= base;
-	}
-	if (index == MAX_LL_STR_SIZE - 2)
-		tmp[index] = '0';
-	res = (char *)malloc(MAX_LL_STR_SIZE - index);
-	if (!res)
-		return (NULL);
-	return (ft_memcpy(res, &tmp[index + 1], MAX_LL_STR_SIZE - index + 1));
+	return (ft_ultoa((uintmax_t)value, base));
 }

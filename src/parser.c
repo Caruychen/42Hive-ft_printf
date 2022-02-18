@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:11:46 by cchen             #+#    #+#             */
-/*   Updated: 2022/02/17 17:36:01 by cchen            ###   ########.fr       */
+/*   Updated: 2022/02/18 10:11:51 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	parse_hex(t_vec *result, int n)
 	int		length;
 	char	*s;
 
-	s = ft_ultoa(n, 16);
+	s = ft_uitoa(n, 16);
 	length = parse_string(result, s);
 	free(s);
 	return (length);
