@@ -6,62 +6,14 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:11:46 by cchen             #+#    #+#             */
-/*   Updated: 2022/02/18 11:58:21 by cchen            ###   ########.fr       */
+/*   Updated: 2022/02/21 12:30:36 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "libft.h"
 
-int	parse_char(t_vec *result, int c)
-{
-	vec_append_strn(result, &c, 1);
-	return (1);
-}
-
-int	parse_string(t_vec *result, const char *s)
-{
-	if (s == NULL)
-		return (vec_append_str(result, "(null)"));
-	return (vec_append_str(result, s));
-}
-
-int	parse_signed_int(t_vec *result, int n)
-{
-	int		length;
-	char	*s;
-
-	s = ft_itoa(n);
-	length = parse_string(result, s);
-	free(s);
-	return (length);
-}
-
-int	parse_uint(t_vec *result, int n, int base, int uppercase)
-{
-	int		length;
-	char	*s;
-
-	s = ft_uitoa(n, base, uppercase);
-	length = parse_string(result, s);
-	free(s);
-	return (length);
-}
-
-int	parse_ptr(t_vec *result, uintptr_t ptr)
-{
-	int	length;
-	char	*x_str;
-	char	*s;
-
-	x_str = ft_ultoa(ptr, 16, FALSE);
-	s = ft_strjoin("0x", x_str);
-	length = parse_string(result, s);
-	free(x_str);
-	free(s);
-	return (length);
-}
-
+/*
 int	parse_conversion(t_vec *result, const char **format, va_list ap)
 {
 	if (**format == 'c')
@@ -83,8 +35,23 @@ int	parse_conversion(t_vec *result, const char **format, va_list ap)
 	(*format)++;
 	return (result->len);
 }
+*/
+int	parse_conversion(t_vec *result, const char **format, t_specs specs)
+{
+	int		index;
 
-int	parse(t_vec *result, const char *format, va_list ap)
+	specs.spec = **format;
+	index = 0;
+	if (ft_islower(**format) * (**format - 'a'))
+		index = **format - 'a';
+	else if (ft_isupper(**format))
+		index = **format - 'A';
+	g_dispatcher[index](result, specs);
+	(*format)++;
+	return (result->len);
+}
+
+int	parse(t_vec *result, const char *format, t_specs specs)
 {
 	const char	*p;
 
@@ -95,7 +62,7 @@ int	parse(t_vec *result, const char *format, va_list ap)
 		{
 			if (vec_append_strn(result, format, (p - 1) - format) < 0)
 				return (-1);
-			parse_conversion(result, &p, ap);
+			parse_conversion(result, &p, specs);
 			format = p;
 		}
 	}
