@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/15 18:03:47 by cchen             #+#    #+#             */
-/*   Updated: 2022/02/21 15:40:10 by cchen            ###   ########.fr       */
+/*   Created: 2022/02/21 15:36:18 by cchen             #+#    #+#             */
+/*   Updated: 2022/02/21 16:01:34 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "vec.h"
 
-# include <stdarg.h>
-# include "vec.h"
-# include "dispatch.h"
+int	append_str(t_vec *result, const char *s)
+{
+	if (s == NULL)
+		return (vec_append_str(result, "(null)"));
+	return (vec_append_str(result, s));
+}
 
-# define TRUE 1
-# define FALSE 0
-
-int	append_str(t_vec *result, const char *s);
-int	get_int_base(const char c);
-
-int	ft_printf(const char *format, ...);
-int	ft_vasprintf(char **ret, const char *format, va_list ap);
-int	parse(t_vec *result, const char *format, t_specs specs);
-
-#endif
+int	get_int_base(const char c)
+{
+	return (10 + 6 * (c == 'x' || c == 'X') - 2 * (c == 'o'));
+}
