@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:11:46 by cchen             #+#    #+#             */
-/*   Updated: 2022/02/22 14:33:47 by cchen            ###   ########.fr       */
+/*   Updated: 2022/02/22 17:20:56 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,17 @@ static int	dispatch_index(const char spec)
 
 int	parse_conversion(t_vec *result, const char **format, t_specs *specs)
 {
-	specs->spec = **format;
-	g_dispatcher[dispatch_index(specs->spec)](result, specs);
-	(*format)++;
-	return (result->len);
+	t_dispatcher	dispatch;
+
+	specs->spec = *(*format)++;
+	dispatch = g_dispatcher[dispatch_index(specs->spec)];
+	if (!dispatch)
+	{
+		if (specs->spec == '%')
+			return (vec_push(result, "%"));
+		return (-1);
+	}
+	return (dispatch(result, specs));
 }
 
 int	parse(t_vec *result, const char *format, t_specs specs)
@@ -41,7 +48,8 @@ int	parse(t_vec *result, const char *format, t_specs specs)
 		{
 			if (vec_append_strn(result, format, (p - 1) - format) < 0)
 				return (-1);
-			parse_conversion(result, &p, &specs);
+			if (parse_conversion(result, &p, &specs) < 0)
+				return (-1);
 			format = p;
 		}
 	}
