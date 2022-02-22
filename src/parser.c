@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:11:46 by cchen             #+#    #+#             */
-/*   Updated: 2022/02/21 16:01:13 by cchen            ###   ########.fr       */
+/*   Updated: 2022/02/22 10:56:32 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	parse(t_vec *result, const char *format, t_specs specs)
 			format = p;
 		}
 	}
-	if (vec_append_strn(result, format, p - format) < 0)
+	if (vec_append_strn(result, format, p + 1 - format) < 0)
 		return (-1);
 	return (0);
 }
