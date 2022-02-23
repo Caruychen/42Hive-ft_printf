@@ -6,17 +6,28 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 11:15:21 by cchen             #+#    #+#             */
-/*   Updated: 2022/02/22 16:06:36 by cchen            ###   ########.fr       */
+/*   Updated: 2022/02/23 09:01:15 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DISPATCH_H
 # define DISPATCH_H
 
+typedef enum e_length
+{
+	null
+	h
+	hh
+	l
+	ll
+	L
+}	t_length;
+
 typedef struct s_specs
 {
 	va_list	ap;
 	char	spec;
+	int	length;
 }	t_specs;
 
 int	parse_char(t_vec *result, t_specs *specs);
