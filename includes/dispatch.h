@@ -6,34 +6,36 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 11:15:21 by cchen             #+#    #+#             */
-/*   Updated: 2022/02/23 09:01:15 by cchen            ###   ########.fr       */
+/*   Updated: 2022/02/25 15:56:54 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DISPATCH_H
 # define DISPATCH_H
 
+# define LEN_FLAG_INDEX_MAX 2
+
 typedef enum e_length
 {
-	null
-	h
-	hh
-	l
-	ll
-	L
+	null,
+	L,
+	h,
+	l,
+	ll,
+	hh,
 }	t_length;
 
 typedef struct s_specs
 {
 	va_list	ap;
 	char	spec;
-	int	length;
+	unsigned int		length : 3;
 }	t_specs;
 
 int	parse_char(t_vec *result, t_specs *specs);
 int	parse_string(t_vec *result, t_specs *specs);
-int	parse_signed_int(t_vec *result, t_specs *specs);
-int	parse_uint(t_vec *result, t_specs *specs);
+int	parse_num(t_vec *result, t_specs *specs);
+int	parse_unum(t_vec *result, t_specs *specs);
 int	parse_ptr(t_vec *result, t_specs *specs);
 
 typedef int					(*t_dispatcher)(t_vec *, t_specs *);
@@ -42,27 +44,27 @@ static const t_dispatcher	g_dispatcher[26] = {
 	NULL,
 	NULL,
 	parse_char,
-	parse_signed_int,
+	parse_num,
 	NULL,
 	NULL,
 	NULL,
 	NULL,
-	parse_signed_int,
+	parse_num,
 	NULL,
 	NULL,
 	NULL,
 	NULL,
 	NULL,
-	parse_uint,
+	parse_unum,
 	parse_ptr,
 	NULL,
 	NULL,
 	parse_string,
 	NULL,
-	parse_uint,
+	parse_unum,
 	NULL,
 	NULL,
-	parse_uint,
+	parse_unum,
 	NULL,
 	NULL,
 };

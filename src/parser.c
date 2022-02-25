@@ -6,12 +6,13 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:11:46 by cchen             #+#    #+#             */
-/*   Updated: 2022/02/23 08:35:04 by cchen            ###   ########.fr       */
+/*   Updated: 2022/02/25 15:52:54 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "libft.h"
+#include <stdio.h>
 
 static int	dispatch_index(const char spec)
 {
@@ -20,6 +21,27 @@ static int	dispatch_index(const char spec)
 	if (ft_isupper(spec))
 		return (spec - 'A');
 	return (0);
+}
+
+static int	parse_length(const char **format, t_specs *specs)
+{
+	int	index;
+
+	index = 0;
+	while (index < LEN_FLAG_INDEX_MAX)
+	{
+		if (!(**format == 'h' || **format == 'l' || **format  == 'L'))
+			return (specs->length);
+		if (**format == 'L')
+			return (specs->length = 1);
+		if (!specs->length)
+			specs->length = **format >> 2;
+		else
+			specs->length = ((**format & 0x0f) >> 2 == specs->length) * ~specs->length;
+		index++;
+		(*format)++;
+	}
+	return (specs->length);
 }
 
 int	parse_conversion(t_vec *result, const char **format, t_specs *specs)
@@ -49,6 +71,7 @@ int	parse(t_vec *result, const char *format, t_specs specs)
 		{
 			if (vec_append_strn(result, format, (p - 1) - format) < 0)
 				return (-1);
+			parse_length(&p, &specs);
 			if (parse_conversion(result, &p, &specs) < 0)
 				return (-1);
 			format = p;

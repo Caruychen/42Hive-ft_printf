@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 11:13:37 by cchen             #+#    #+#             */
-/*   Updated: 2022/02/23 08:47:03 by cchen            ###   ########.fr       */
+/*   Updated: 2022/02/25 15:56:56 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	parse_string(t_vec *result, t_specs *specs)
 	return (append_str(result, va_arg(specs->ap, char *)));
 }
 
-int	parse_signed_int(t_vec *result, t_specs *specs)
+int	parse_num(t_vec *result, t_specs *specs)
 {
 	int		length;
 	char	*s;
@@ -39,7 +39,7 @@ int	parse_signed_int(t_vec *result, t_specs *specs)
 	return (length);
 }
 
-int	parse_uint(t_vec *result, t_specs *specs)
+int	parse_unum(t_vec *result, t_specs *specs)
 {
 	int		length;
 	char	*s;
