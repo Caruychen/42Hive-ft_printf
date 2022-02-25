@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 11:13:37 by cchen             #+#    #+#             */
-/*   Updated: 2022/02/25 15:56:56 by cchen            ###   ########.fr       */
+/*   Updated: 2022/02/25 16:08:09 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	parse_unum(t_vec *result, t_specs *specs)
 
 	base = get_int_base(specs->spec);
 	uppercase = specs->spec == 'X';
-	s = ft_uitoa(va_arg(specs->ap, int), base, uppercase);
+	s = ft_ultoa(va_arg(specs->ap, int), base, uppercase);
 	if (!s)
 		return (-1);
 	length = append_str(result, s);
