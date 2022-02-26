@@ -6,29 +6,17 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 11:15:21 by cchen             #+#    #+#             */
-/*   Updated: 2022/02/25 15:56:54 by cchen            ###   ########.fr       */
+/*   Updated: 2022/02/26 23:24:05 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DISPATCH_H
 # define DISPATCH_H
 
-# define LEN_FLAG_INDEX_MAX 2
-
-typedef enum e_length
-{
-	null,
-	L,
-	h,
-	l,
-	ll,
-	hh,
-}	t_length;
-
 typedef struct s_specs
 {
-	va_list	ap;
-	char	spec;
+	va_list		ap;
+	char		spec;
 	unsigned int		length : 3;
 }	t_specs;
 

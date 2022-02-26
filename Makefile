@@ -6,7 +6,7 @@
 #    By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 15:25:42 by cchen             #+#    #+#              #
-#    Updated: 2022/02/21 15:39:17 by cchen            ###   ########.fr        #
+#    Updated: 2022/02/26 23:22:04 by cchen            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ INCLUDES := -I./libft -I./includes
 
 SRC_DIR := ./src
 OBJ_DIR := ./obj
-SRCS := ./src/$(EXE).c ./src/ft_vasprintf.c ./src/parser.c ./src/conversions.c ./src/utils.c
+SRCS := ./src/$(EXE).c ./src/ft_vasprintf.c ./src/parser.c ./src/conversions.c ./src/utils.c ./src/len_modifiers.c
 OBJS := $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 HEADER := $(SRC_DIR)/$(EXE).h
 
