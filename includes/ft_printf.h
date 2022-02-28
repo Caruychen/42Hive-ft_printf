@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 18:03:47 by cchen             #+#    #+#             */
-/*   Updated: 2022/02/26 23:26:07 by cchen            ###   ########.fr       */
+/*   Updated: 2022/02/28 13:27:41 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # define TRUE 1
 # define FALSE 0
 
+void	init_specs(t_specs *specs, va_list ap);
+void	reset_specs(t_specs *specs);
 int	append_str(t_vec *result, const char *s);
 int	get_int_base(const char c);
 

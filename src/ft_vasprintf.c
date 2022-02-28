@@ -6,18 +6,12 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 13:39:23 by cchen             #+#    #+#             */
-/*   Updated: 2022/02/25 13:53:15 by cchen            ###   ########.fr       */
+/*   Updated: 2022/02/28 13:21:52 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "libft.h"
-
-static void	init_specs(t_specs *specs, va_list ap)
-{
-	va_copy(specs->ap, ap);
-	specs->length = 0;
-}
 
 int	ft_vasprintf(char **ret, const char *format, va_list ap)
 {
