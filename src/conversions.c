@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 11:13:37 by cchen             #+#    #+#             */
-/*   Updated: 2022/02/26 23:19:25 by cchen            ###   ########.fr       */
+/*   Updated: 2022/02/28 10:48:18 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,10 @@ int	parse_num(t_vec *result, t_specs *specs)
 {
 	int		length;
 	char	*s;
+	char	spec;
 
-	s = ft_itoa(va_arg(specs->ap, int));
-	if (!s)
-		return (-1);
-	length = append_str(result, s);
-	free(s);
-	return (length);
-}
-
-int	parse_unum(t_vec *result, t_specs *specs)
-{
-	int		length;
-	char	*s;
-
+	spec = specs->spec;
+	specs->is_signed = (spec == 'i' || spec == 'd');
 	s = g_modifier[specs->length](specs);
 	if (!s)
 		return (-1);

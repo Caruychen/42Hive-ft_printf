@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 23:22:57 by cchen             #+#    #+#             */
-/*   Updated: 2022/02/26 23:24:01 by cchen            ###   ########.fr       */
+/*   Updated: 2022/02/28 10:34:46 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,20 @@ typedef enum e_length
 	hh,
 }	t_length;
 
-char	*lengthmod_uchar(t_specs *specs);
-char	*lengthmod_ushort(t_specs *specs);
-char	*lengthmod_uint(t_specs *specs);
-char	*lengthmod_ulong(t_specs *specs);
+char	*lengthmod_char(t_specs *specs);
+char	*lengthmod_short(t_specs *specs);
+char	*lengthmod_int(t_specs *specs);
+char	*lengthmod_long(t_specs *specs);
 
 typedef char				*(*t_modifier)(t_specs *);
 
 static const t_modifier		g_modifier[6] = {
-	lengthmod_uint,
-	lengthmod_ulong,
-	lengthmod_ushort,
-	lengthmod_ulong,
-	lengthmod_ulong,
-	lengthmod_uchar
+	lengthmod_int,
+	lengthmod_long,
+	lengthmod_short,
+	lengthmod_long,
+	lengthmod_long,
+	lengthmod_char
 };
 
 #endif
