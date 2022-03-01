@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 11:13:37 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/01 12:56:42 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/01 16:10:14 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,14 @@ int	parse_ptr(t_vec *result, t_specs *specs)
 	free(x_str);
 	free(s);
 	return (length);
+}
+
+int	parse_flt(t_vec *result, t_specs *specs)
+{
+	float	flt;
+	int		ipart;
+
+	flt = va_arg(specs->ap, double);
+	ipart = (int) flt;
+
 }
