@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 11:15:21 by cchen             #+#    #+#             */
-/*   Updated: 2022/02/28 13:29:01 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/02 09:09:03 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	parse_char(t_vec *result, t_specs *specs);
 int	parse_string(t_vec *result, t_specs *specs);
 int	parse_num(t_vec *result, t_specs *specs);
 int	parse_ptr(t_vec *result, t_specs *specs);
+int	parse_flt(t_vec *result, t_specs *specs);
 
 typedef int					(*t_dispatcher)(t_vec *, t_specs *);
 
@@ -34,7 +35,7 @@ static const t_dispatcher	g_dispatcher[26] = {
 	parse_char,
 	parse_num,
 	NULL,
-	NULL,
+	parse_flt,
 	NULL,
 	NULL,
 	parse_num,
