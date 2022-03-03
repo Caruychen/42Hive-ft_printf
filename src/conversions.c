@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 11:13:37 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/02 16:57:00 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/03 08:13:10 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,9 @@ int	parse_flt(t_vec *result, t_specs *specs)
 	double	value;
 
 	value = va_arg(specs->ap, double);
-	printf("%f\n",fmod(value, 100000000000000));
-	printf("%f\n", value / (1000000000000000000.0));
 	printf("%f\n", ft_fmod(9.7, 2.3));
+	printf("%f\n", ft_fmod(42, 5));
+	printf("%f\n", ft_fmod(42, 10));
 
 	return (result->len);
 }
