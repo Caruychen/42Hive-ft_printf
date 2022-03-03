@@ -6,23 +6,11 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 15:59:43 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/03 14:18:35 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/03 14:34:01 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_math.h"
-
-static uint64_t	_get_diff(uint64_t *i, uint64_t *ux, uint64_t *uy)
-{
-	*i = *ux - *uy;
-	if (*i >> 63 == 0)
-	{
-		if (*i == 0)
-			return (0);
-		*ux = *i;
-	}
-	return (*i);
-}
 
 static void	_normalise(uint64_t *u, int	*e)
 {
@@ -41,6 +29,39 @@ static void	_normalise(uint64_t *u, int	*e)
 	}
 	*u &= -1ULL >> 12;
 	*u |= 1ULL << 52;
+}
+
+static uint64_t	_get_diff(uint64_t *i, uint64_t *ux, uint64_t *uy)
+{
+	*i = *ux - *uy;
+	if (*i >> 63 == 0)
+	{
+		if (*i == 0)
+			return (0);
+		*ux = *i;
+	}
+	return (*i);
+}
+
+static uint64_t	_x_mod_y(uint64_t *ux, uint64_t *uy, int *ex, int *ey)
+{
+	uint64_t	i;
+
+	while (*ex > *ey)
+	{
+		if (!_get_diff(&i, ux, uy))
+			return (0);
+		*ux <<= 1;
+		*ex--;
+	}
+	if (!_get_diff(&i, ux, uy))
+		return (0);
+	while (*ux >> 52 == 0)
+	{
+		*ux <<= 1;
+		*ex--;
+	}
+	return (i);
 }
 
 double	ft_fmod(double x, double y)
