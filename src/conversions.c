@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 11:13:37 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/04 16:03:41 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/04 16:42:16 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	parse_num(t_vec *result, t_specs *specs)
 	if (!s)
 		return (-1);
 	length = append_str(result, s);
-	free(s);
+	ft_strdel(&s);
 	return (length);
 }
 
@@ -54,12 +54,12 @@ int	parse_ptr(t_vec *result, t_specs *specs)
 	s = ft_strjoin("0x", x_str);
 	if (!s)
 	{
-		free(x_str);
+		ft_strdel(&x_str);
 		return (-1);
 	}
 	length = append_str(result, s);
-	free(x_str);
-	free(s);
+	ft_strdel(&x_str);
+	ft_strdel(&s);
 	return (length);
 }
 
@@ -77,6 +77,7 @@ int	parse_flt(t_vec *result, t_specs *specs)
 		value *= -1;
 	value -= (long long) value;
 	value = value * ft_pow(10, 6);
+	value += 0.5;
 	s = ft_ultoa((unsigned long) value, 10, FALSE);
 	append_str(result, s);
 	ft_strdel(&s);
