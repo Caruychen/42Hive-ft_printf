@@ -6,14 +6,12 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 11:13:37 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/04 11:37:01 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/04 16:03:41 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "libft.h"
-#include <stdio.h>
-#include <math.h>
 
 int	parse_char(t_vec *result, t_specs *specs)
 {
@@ -68,12 +66,19 @@ int	parse_ptr(t_vec *result, t_specs *specs)
 int	parse_flt(t_vec *result, t_specs *specs)
 {
 	double	value;
+	char	*s;
 
 	value = va_arg(specs->ap, double);
-	printf("%f\n", ft_fmod(9.7, 2.3));
-	printf("%f\n", ft_fmod(42, 5));
-	printf("%f\n", ft_fmod(-42, 10));
-	printf("%f\n", ft_fmod(42, 7));
-
+	s = ft_ltoa((unsigned long) value, 10);
+	append_str(result, s);
+	ft_strdel(&s);
+	vec_push(result, ".");
+	if (value < 0)
+		value *= -1;
+	value -= (long long) value;
+	value = value * ft_pow(10, 6);
+	s = ft_ultoa((unsigned long) value, 10, FALSE);
+	append_str(result, s);
+	ft_strdel(&s);
 	return (result->len);
 }

@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:11:46 by cchen             #+#    #+#             */
-/*   Updated: 2022/02/28 13:23:22 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/04 16:06:46 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,15 @@ static int	parse_length(const char **format, t_specs *specs)
 	index = 0;
 	while (index < LEN_FLAG_INDEX_MAX)
 	{
-		if (!(**format == 'h' || **format == 'l' || **format  == 'L'))
+		if (!(**format == 'h' || **format == 'l' || **format == 'L'))
 			return (specs->length);
 		if (**format == 'L')
 			return (specs->length = 1);
 		if (!specs->length)
 			specs->length = **format >> 2;
 		else
-			specs->length = ((**format & 0x0f) >> 2 == specs->length) * ~specs->length;
+			specs->length = ((**format & 0x0f) >> 2 == specs->length)
+				* ~specs->length;
 		index++;
 		(*format)++;
 	}
