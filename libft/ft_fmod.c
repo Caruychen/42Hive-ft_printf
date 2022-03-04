@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 15:59:43 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/03 14:34:01 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/04 11:36:29 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,27 @@ static uint64_t	_x_mod_y(uint64_t *ux, uint64_t *uy, int *ex, int *ey)
 		if (!_get_diff(&i, ux, uy))
 			return (0);
 		*ux <<= 1;
-		*ex--;
+		(*ex)--;
 	}
 	if (!_get_diff(&i, ux, uy))
 		return (0);
 	while (*ux >> 52 == 0)
 	{
 		*ux <<= 1;
-		*ex--;
+		(*ex)--;
 	}
 	return (i);
+}
+
+static void	_scale_result(uint64_t *ux, int ex)
+{
+	if (ex > 0)
+	{
+		*ux -= 1ULL << 52;
+		*ux |= (uint64_t) ex << 52;
+	}
+	else
+		*ux >>= -ex + 1;
 }
 
 double	ft_fmod(double x, double y)
@@ -70,35 +81,22 @@ double	ft_fmod(double x, double y)
 	t_dcast		uy;
 	int			ex;
 	int			ey;
-	uint64_t	i;
 
 	ux.d = x;
 	uy.d = y;
 	ex = ux.u >> 52 & 0x7ff;
 	ey = uy.u >> 52 & 0x7ff;
+	if (ux.u << 1 <= uy.u << 1)
+	{
+		if (ux.u << 1 == uy.u << 1)
+			return (0);
+		return (x);
+	}
 	_normalise(&ux.u, &ex);
 	_normalise(&uy.u, &ey);
-	while (ex > ey)
-	{
-		if (!_get_diff(&i, &ux.u, &uy.u))
-			return (i);
-		ux.u <<= 1;
-		ex--;
-	}
-	if (!_get_diff(&i, &ux.u, &uy.u))
-		return (i);
-	while (ux.u >> 52 == 0)
-	{
-		ux.u <<= 1;
-		ex--;
-	}
-	if (ex > 0)
-	{
-		ux.u -= 1ULL << 52;
-		ux.u |= (uint64_t) ex << 52;
-	}
-	else
-		ux.u >>= -ex + 1;
+	if (!_x_mod_y(&ux.u, &uy.u, &ex, &ey))
+		return (0);
+	_scale_result(&ux.u, ex);
 	ux.u |= (uint64_t)(x < 0) << 63;
 	return (ux.d);
 }
