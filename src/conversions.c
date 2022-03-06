@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 11:13:37 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/06 09:11:50 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/06 09:31:14 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,17 @@ int	parse_flt(t_vec *result, t_specs *specs)
 	char	*s;
 
 	value = va_arg(specs->ap, double);
-	value += ((0.5 - (value < 0)) / ft_pow(10, 6));
-	s = ft_ltoa((unsigned long) value, 10);
+	if (value < 0)
+	{
+		vec_push(result, "-");
+		value *= -1;
+	}
+	value += 0.5 / ft_pow(10, 6);
+	s = ft_ultoa((unsigned long) value, 10, FALSE);
 	append_str(result, s);
 	ft_strdel(&s);
 	vec_push(result, ".");
-	if (value < 0)
-		value *= -1;
-	value -= (long long) value;
+	value -= (unsigned long) value;
 	value = value * ft_pow(10, 6);
 	s = ft_ultoa((unsigned long) value, 10, FALSE);
 	padding(result, 6 - ft_strlen(s));
