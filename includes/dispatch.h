@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 11:15:21 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/02 09:09:03 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/06 13:40:54 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,39 +21,39 @@ typedef struct s_specs
 	unsigned int		is_signed : 1;
 }	t_specs;
 
-int	parse_char(t_vec *result, t_specs *specs);
-int	parse_string(t_vec *result, t_specs *specs);
-int	parse_num(t_vec *result, t_specs *specs);
-int	parse_ptr(t_vec *result, t_specs *specs);
-int	parse_flt(t_vec *result, t_specs *specs);
+int	conv_char(t_vec *result, t_specs *specs);
+int	conv_string(t_vec *result, t_specs *specs);
+int	conv_num(t_vec *result, t_specs *specs);
+int	conv_ptr(t_vec *result, t_specs *specs);
+int	conv_flt(t_vec *result, t_specs *specs);
 
 typedef int					(*t_dispatcher)(t_vec *, t_specs *);
 
 static const t_dispatcher	g_dispatcher[26] = {
 	NULL,
 	NULL,
-	parse_char,
-	parse_num,
+	conv_char,
+	conv_num,
 	NULL,
-	parse_flt,
-	NULL,
-	NULL,
-	parse_num,
+	conv_flt,
 	NULL,
 	NULL,
+	conv_num,
 	NULL,
 	NULL,
 	NULL,
-	parse_num,
-	parse_ptr,
 	NULL,
 	NULL,
-	parse_string,
+	conv_num,
+	conv_ptr,
 	NULL,
-	parse_num,
+	NULL,
+	conv_string,
+	NULL,
+	conv_num,
 	NULL,
 	NULL,
-	parse_num,
+	conv_num,
 	NULL,
 	NULL,
 };

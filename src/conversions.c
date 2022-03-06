@@ -6,14 +6,14 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 11:13:37 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/06 09:31:14 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/06 13:39:25 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "libft.h"
 
-int	parse_char(t_vec *result, t_specs *specs)
+int	conv_char(t_vec *result, t_specs *specs)
 {
 	char	c;
 
@@ -21,12 +21,12 @@ int	parse_char(t_vec *result, t_specs *specs)
 	return (vec_append_strn(result, &c, 1));
 }
 
-int	parse_string(t_vec *result, t_specs *specs)
+int	conv_string(t_vec *result, t_specs *specs)
 {
 	return (append_str(result, va_arg(specs->ap, char *)));
 }
 
-int	parse_num(t_vec *result, t_specs *specs)
+int	conv_num(t_vec *result, t_specs *specs)
 {
 	int		length;
 	char	*s;
@@ -42,7 +42,7 @@ int	parse_num(t_vec *result, t_specs *specs)
 	return (length);
 }
 
-int	parse_ptr(t_vec *result, t_specs *specs)
+int	conv_ptr(t_vec *result, t_specs *specs)
 {
 	int		length;
 	char	*x_str;
@@ -63,7 +63,7 @@ int	parse_ptr(t_vec *result, t_specs *specs)
 	return (length);
 }
 
-int	parse_flt(t_vec *result, t_specs *specs)
+int	conv_flt(t_vec *result, t_specs *specs)
 {
 	double	value;
 	char	*s;
