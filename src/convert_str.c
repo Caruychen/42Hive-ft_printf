@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 11:13:57 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/07 11:14:51 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/07 16:41:33 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,3 @@ int	conv_string(t_vec *result, t_specs *specs)
 {
 	return (append_str(result, va_arg(specs->ap, char *)));
 }
-
-
