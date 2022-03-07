@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 11:16:11 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/07 11:16:55 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/07 22:15:09 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 int	conv_num(t_vec *result, t_specs *specs)
 {
-	int		length;
+	int		res;
+	size_t	len;
 	char	*s;
 	char	spec;
 
@@ -24,7 +25,9 @@ int	conv_num(t_vec *result, t_specs *specs)
 	s = g_modifier[specs->length](specs);
 	if (!s)
 		return (-1);
-	length = append_str(result, s);
+	len = ft_strlen(s);
+	padding(result, specs->precision - len);
+	res = vec_append_strn(result, s, len);
 	ft_strdel(&s);
-	return (length);
+	return (res);
 }

@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 15:36:18 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/07 16:40:45 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/07 21:13:56 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,15 @@ int	get_int_base(const char c)
 void	init_specs(t_specs *specs, va_list ap)
 {
 	va_copy(specs->ap, ap);
-	specs->length = 0;
-	specs->flags = 0;
+	reset_specs(specs);
 }
 
 void	reset_specs(t_specs *specs)
 {
 	specs->length = 0;
 	specs->flags = 0;
+	specs->precision = 0;
+	specs->precision_on = 0;
 }
 
 void	padding(t_vec *result, int length)

@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:11:46 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/07 17:09:36 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/07 21:14:39 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,14 @@ static void	parse_precision(const char **format, t_specs *specs)
 {
 	if (**format != '.')
 		return ;
-	specs->precision = 0;
+	specs->precision_on = 1;
+	(*format)++;
+	if (**format != '-')
+		specs->precision = ft_atoi(*format);	
+	else
+		(*format)++;
+	while (ft_isdigit(**format))
+		(*format)++;
 }
 
 static int	parse_length(const char **format, t_specs *specs)
