@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 11:15:21 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/06 13:40:54 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/07 15:22:45 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ typedef struct s_specs
 	char				spec;
 	unsigned int		length : 3;
 	unsigned int		is_signed : 1;
+	unsigned int		flags: 5;
 }	t_specs;
 
 int	conv_char(t_vec *result, t_specs *specs);

@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 18:03:47 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/06 09:11:11 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/07 16:33:38 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "vec.h"
 # include "dispatch.h"
 # include "len_modifiers.h"
+# include "flags.h"
 
 # define TRUE 1
 # define FALSE 0
