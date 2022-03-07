@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 11:19:45 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/07 11:22:17 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/07 16:39:33 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,3 @@ int	conv_ptr(t_vec *result, t_specs *specs)
 	ft_strdel(&s);
 	return (length);
 }
-
-
