@@ -6,13 +6,12 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 14:11:46 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/04 16:06:46 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/07 16:42:23 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "libft.h"
-#include <stdio.h>
 
 static int	dispatch_index(const char spec)
 {
@@ -21,6 +20,28 @@ static int	dispatch_index(const char spec)
 	if (ft_isupper(spec))
 		return (spec - 'A');
 	return (0);
+}
+
+static void	parse_flags(const char **format, t_specs *specs)
+{
+	while (ft_strchr(FLAGLIST, **format))
+	{
+		if (**format == '#')
+			specs->flags |= HASH;
+		else if (**format == '0')
+			specs->flags |= ZERO;
+		else if (**format == '-')
+			specs->flags |= DASH;
+		else if (**format == ' ')
+			specs->flags |= SPACE;
+		else
+			specs->flags |= PLUS;
+		(*format)++;
+	}
+	if (specs->flags & DASH)
+		specs->flags &= ~(ZERO);
+	if (specs->flags & PLUS)
+		specs->flags &= ~(SPACE);
 }
 
 static int	parse_length(const char **format, t_specs *specs)
@@ -33,7 +54,10 @@ static int	parse_length(const char **format, t_specs *specs)
 		if (!(**format == 'h' || **format == 'l' || **format == 'L'))
 			return (specs->length);
 		if (**format == 'L')
+		{
+			(*format)++;
 			return (specs->length = 1);
+		}
 		if (!specs->length)
 			specs->length = **format >> 2;
 		else
@@ -45,7 +69,7 @@ static int	parse_length(const char **format, t_specs *specs)
 	return (specs->length);
 }
 
-int	parse_conversion(t_vec *result, const char **format, t_specs *specs)
+static int	parse_conversion(t_vec *result, const char **format, t_specs *specs)
 {
 	t_dispatcher	dispatch;
 
@@ -73,6 +97,7 @@ int	parse(t_vec *result, const char *format, t_specs specs)
 			reset_specs(&specs);
 			if (vec_append_strn(result, format, (p - 1) - format) < 0)
 				return (-1);
+			parse_flags(&p, &specs);
 			parse_length(&p, &specs);
 			if (parse_conversion(result, &p, &specs) < 0)
 				return (-1);
