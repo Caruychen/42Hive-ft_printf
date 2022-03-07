@@ -1,0 +1,4 @@
+libft/*.o
+libft/*.a
+obj/
+libftprintf.a
