@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 11:13:37 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/07 11:21:40 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/07 11:45:25 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ int	conv_flt(t_vec *result, t_specs *specs)
 	double	value;
 	char	*s;
 
-	value = va_arg(specs->ap, double);
+	if (specs->length == L)
+		value = va_arg(specs->ap, long double);
+	else
+		value = va_arg(specs->ap, double);
 	if (value < 0)
 	{
 		vec_push(result, "-");
