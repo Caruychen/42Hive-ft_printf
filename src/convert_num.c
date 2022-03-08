@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 11:16:11 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/08 13:50:15 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/08 13:59:25 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	push_result(t_vec *result, t_specs specs, char *s)
 {
 	int		res;
 	size_t	len;
-	
+
 	len = !is_null_precision(specs) * ft_strlen(s);
 	if (!(specs.flags & DASH))
 	{

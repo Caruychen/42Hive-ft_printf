@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 11:13:57 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/08 13:32:10 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/08 13:59:13 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 int	append_char(t_vec *result, t_specs *specs, char c)
 {
 	int	res;
+
 	if (!(specs->flags & DASH))
 		padding(result, specs->width - 1, specs->pad_char);
 	res = vec_push(result, &c);
