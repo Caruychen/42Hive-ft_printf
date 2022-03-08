@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 11:13:37 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/07 23:13:10 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/08 10:19:04 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	append_decimals(t_vec *result, double value, unsigned int precision)
 	len = append_num(result, value);
 	if (len == -1)
 		return (-1);
-	padding(result, precision - len);
+	padding(result, precision - len, '0');
 	return (result->len);
 }
 
