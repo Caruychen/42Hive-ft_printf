@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 11:13:37 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/08 10:35:38 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/08 11:35:24 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,24 +42,37 @@ static int	append_decimals(t_vec *result, double value, unsigned int precision)
 	return (result->len);
 }
 
+static int	push_result(t_vec *result, t_vec *vec, t_specs *specs)
+{
+	if (specs->width > vec->len)
+		padding(result, specs->width - vec->len, ' ');
+	vec_append(result, vec);
+	vec_free(vec);
+	return (result->len);
+}
+
 int	conv_dbl(t_vec *result, t_specs *specs)
 {
 	double			value;
 	unsigned int	precision;
+	t_vec			vec;
 
 	if (specs->length == L)
 		value = va_arg(specs->ap, long double);
 	else
 		value = va_arg(specs->ap, double);
+	if (vec_new(&vec, 1, sizeof(char)) == -1)
+		return (-1);
 	if (value < 0)
 	{
-		vec_push(result, "-");
+		vec_push(&vec, "-");
 		value *= -1;
 	}
 	precision = 6 * !specs->precision_on + specs->precision;
 	value += 0.5 / ft_pow(10, precision);
-	append_num(result, value);
+	append_num(&vec, value);
 	if (specs->precision_on && !specs->precision)
-		return (result->len);
-	return (append_decimals(result, value, precision));
+		return (push_result(result, &vec, specs));
+	append_decimals(&vec, value, precision);
+	return (push_result(result, &vec, specs));
 }
