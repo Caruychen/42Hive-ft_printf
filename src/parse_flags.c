@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 09:54:52 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/08 09:56:21 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/08 11:51:41 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ void	parse_flags(const char **format, t_specs *specs)
 		if (**format == '#')
 			specs->flags |= HASH;
 		else if (**format == '0')
+		{
 			specs->flags |= ZERO;
+			specs->pad_char = '0';
+		}
 		else if (**format == '-')
 			specs->flags |= DASH;
 		else if (**format == ' ')
@@ -31,7 +34,10 @@ void	parse_flags(const char **format, t_specs *specs)
 		(*format)++;
 	}
 	if (specs->flags & DASH)
+	{
 		specs->flags &= ~(ZERO);
+		specs->pad_char = ' ';
+	}
 	if (specs->flags & PLUS)
 		specs->flags &= ~(SPACE);
 }

@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 11:15:21 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/08 10:08:46 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/08 11:50:30 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_specs
 	unsigned int		precision;
 	unsigned int		precision_on : 1;
 	unsigned int		width;
+	char				pad_char;
 }	t_specs;
 
 int	conv_char(t_vec *result, t_specs *specs);
