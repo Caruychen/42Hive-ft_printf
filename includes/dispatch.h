@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 11:15:21 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/08 11:50:30 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/08 13:23:10 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 typedef struct s_specs
 {
 	va_list				ap;
+	long				value;
 	char				spec;
 	unsigned int		length : 3;
 	unsigned int		is_signed : 1;
@@ -29,6 +30,7 @@ typedef struct s_specs
 	char				pad_char;
 }	t_specs;
 
+int	append_char(t_vec *result, t_specs *specs, char c);
 int	conv_char(t_vec *result, t_specs *specs);
 int	conv_string(t_vec *result, t_specs *specs);
 int	conv_num(t_vec *result, t_specs *specs);
