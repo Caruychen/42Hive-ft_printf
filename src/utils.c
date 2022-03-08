@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 15:36:18 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/08 11:52:02 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/08 12:58:21 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	init_specs(t_specs *specs, va_list ap)
 
 void	reset_specs(t_specs *specs)
 {
+	specs->value = 0;
 	specs->length = 0;
 	specs->flags = 0;
 	specs->precision = 0;
