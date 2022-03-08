@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 09:52:57 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/08 09:53:42 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/08 10:29:07 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	parse_precision(const char **format, t_specs *specs)
 	specs->precision_on = 1;
 	(*format)++;
 	if (**format != '-')
-		specs->precision = ft_atoi(*format);	
+		specs->precision = ft_atoi(*format);
 	else
 		(*format)++;
 	while (ft_isdigit(**format))
