@@ -6,13 +6,17 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 11:16:11 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/08 11:52:49 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/08 13:11:29 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "ft_printf.h"
 
+static inline int	is_null_precision(t_specs specs)
+{
+	return (specs.precision_on && specs.precision == 0 && specs.value == 0);
+}
 int	conv_num(t_vec *result, t_specs *specs)
 {
 	int		res;
@@ -25,7 +29,7 @@ int	conv_num(t_vec *result, t_specs *specs)
 	s = g_modifier[specs->length](specs);
 	if (!s)
 		return (-1);
-	len = ft_strlen(s);
+	len = !is_null_precision(*specs) * ft_strlen(s);
 	padding(
 		result,
 		specs->width - (ft_imax(specs->precision, len)),
