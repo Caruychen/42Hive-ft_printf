@@ -6,7 +6,7 @@
 #    By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 15:25:42 by cchen             #+#    #+#              #
-#    Updated: 2022/03/07 11:21:58 by cchen            ###   ########.fr        #
+#    Updated: 2022/03/08 09:56:58 by cchen            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,11 @@ SRC_DIR := ./src
 OBJ_DIR := ./obj
 SRCS := ./src/$(EXE).c \
 	./src/ft_vasprintf.c \
-	./src/parser.c \
+	./src/parse.c \
+	./src/parse_conversion.c \
+	./src/parse_length.c \
+	./src/parse_precision.c \
+	./src/parse_flags.c \
 	./src/convert_str.c \
 	./src/convert_num.c \
 	./src/convert_ptr.c \

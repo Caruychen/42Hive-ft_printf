@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 18:03:47 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/07 16:33:38 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/08 09:55:49 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,9 @@ void	padding(t_vec *result, int length);
 int		ft_printf(const char *format, ...);
 int		ft_vasprintf(char **ret, const char *format, va_list ap);
 int		parse(t_vec *result, const char *format, t_specs specs);
+int		parse_conversion(t_vec *result, const char **format, t_specs *specs);
+int		parse_length(const char **format, t_specs *specs);
+void	parse_precision(const char **format, t_specs *specs);
+void	parse_flags(const char **format, t_specs *specs);
 
 #endif
