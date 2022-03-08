@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 09:41:22 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/08 09:46:25 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/08 13:25:21 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	parse_conversion(t_vec *result, const char **format, t_specs *specs)
 	if (!dispatch)
 	{
 		if (specs->spec == '%')
-			return (vec_push(result, "%"));
+			return (append_char(result, specs, '%'));
 		vec_free(result);
 		return (-1);
 	}
