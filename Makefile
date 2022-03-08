@@ -6,7 +6,7 @@
 #    By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 15:25:42 by cchen             #+#    #+#              #
-#    Updated: 2022/03/08 09:56:58 by cchen            ###   ########.fr        #
+#    Updated: 2022/03/08 10:15:10 by cchen            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRCS := ./src/$(EXE).c \
 	./src/parse_length.c \
 	./src/parse_precision.c \
 	./src/parse_flags.c \
+	./src/parse_width.c \
 	./src/convert_str.c \
 	./src/convert_num.c \
 	./src/convert_ptr.c \
