@@ -6,15 +6,15 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 11:15:21 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/08 13:23:10 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/08 14:00:47 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DISPATCH_H
 # define DISPATCH_H
 
-#include <stdarg.h>
-#include "vec.h"
+# include <stdarg.h>
+# include "vec.h"
 
 typedef struct s_specs
 {
