@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 23:19:45 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/08 12:57:40 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/09 12:01:55 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,24 @@ char	*lengthmod_short(t_specs *specs)
 
 char	*lengthmod_int(t_specs *specs)
 {
+	int		sign;
+	char	*res;
+	char	*tmp;
+
 	specs->value = va_arg(specs->ap, int);
+	sign = 1 - ((specs->value < 0) * 2);
 	if (specs->is_signed)
-		return (ft_itoa(specs->value));
-	return (ft_uitoa(specs->value,
-			get_int_base(specs->spec), specs->spec == 'X'));
+		res = ft_uitoa(sign * specs->value, get_int_base(specs->spec), FALSE);
+	else
+		res = ft_uitoa(specs->value,
+				get_int_base(specs->spec), specs->spec == 'X');
+	if (sign < 0 && specs->is_signed)
+	{
+		tmp = res;
+		res = ft_strjoin("-", res);
+		ft_strdel(&tmp);
+	}
+	return (res);
 }
 
 char	*lengthmod_long(t_specs *specs)
