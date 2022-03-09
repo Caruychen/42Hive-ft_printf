@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 11:16:11 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/08 16:14:48 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/09 11:21:56 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 static inline int	is_null_precision(t_specs specs)
 {
-	return (specs.precision_on && specs.precision == 0 && specs.value == 0);
+	return (specs.precision_on && !(specs.spec == 'o' && specs.flags & HASH)
+		&& specs.precision == 0 && specs.value == 0);
 }
 
 static int	push_result(t_vec *result, t_specs specs, char *s)
@@ -34,6 +35,7 @@ static int	push_result(t_vec *result, t_specs specs, char *s)
 		if (ft_tolower(specs.spec) == 'x')
 			specs.width -= 2;
 	}
+	specs.width -= ft_imax(specs.precision, len);
 	if (specs.flags & HASH && specs.flags & ZERO && specs.value)
 	{
 		if (specs.spec == 'o' || ft_tolower(specs.spec) == 'x')
@@ -42,12 +44,7 @@ static int	push_result(t_vec *result, t_specs specs, char *s)
 			vec_push(result, &specs.spec);
 	}
 	if (!(specs.flags & DASH))
-	{
-		padding(
-			result,
-			specs.width - (ft_imax(specs.precision, len)),
-			specs.pad_char);
-	}
+		padding(result, specs.width, specs.pad_char);
 	if (specs.flags & HASH && !(specs.flags & ZERO) && specs.value)
 	{
 		if (specs.spec == 'o' || ft_tolower(specs.spec) == 'x')
@@ -58,12 +55,7 @@ static int	push_result(t_vec *result, t_specs specs, char *s)
 	padding(result, specs.precision - len, '0');
 	res = vec_append_strn(result, s, len);
 	if (specs.flags & DASH)
-	{
-		padding(
-			result,
-			specs.width - (ft_imax(specs.precision, len)),
-			specs.pad_char);
-	}
+		padding(result, specs.width, specs.pad_char);
 	return (res);
 }
 
