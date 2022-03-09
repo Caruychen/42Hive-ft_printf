@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 15:36:18 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/08 12:58:21 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/09 13:45:16 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	reset_specs(t_specs *specs)
 	specs->precision_on = 0;
 	specs->width = 0;
 	specs->pad_char = ' ';
+	specs->sign = '+';
 }
 
 void	padding(t_vec *result, int length, char c)

@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 11:16:11 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/09 11:21:56 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/09 14:46:37 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static int	push_result(t_vec *result, t_specs specs, char *s)
 	size_t	len;
 
 	len = !is_null_precision(specs) * ft_strlen(s);
+	/*
 	if (specs.flags & HASH)
 	{
 		if (specs.spec == 'o')
@@ -52,7 +53,7 @@ static int	push_result(t_vec *result, t_specs specs, char *s)
 		if (ft_tolower(specs.spec) == 'x')
 			vec_push(result, &specs.spec);
 	}
-	padding(result, specs.precision - len, '0');
+	*/
 	res = vec_append_strn(result, s, len);
 	if (specs.flags & DASH)
 		padding(result, specs.width, specs.pad_char);
