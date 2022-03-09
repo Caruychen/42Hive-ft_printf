@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 11:16:11 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/09 14:46:37 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/10 00:27:43 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,38 +25,9 @@ static int	push_result(t_vec *result, t_specs specs, char *s)
 	size_t	len;
 
 	len = !is_null_precision(specs) * ft_strlen(s);
-	/*
-	if (specs.flags & HASH)
-	{
-		if (specs.spec == 'o')
-		{
-			specs.width--;
-			specs.precision--;
-		}
-		if (ft_tolower(specs.spec) == 'x')
-			specs.width -= 2;
-	}
-	specs.width -= ft_imax(specs.precision, len);
-	if (specs.flags & HASH && specs.flags & ZERO && specs.value)
-	{
-		if (specs.spec == 'o' || ft_tolower(specs.spec) == 'x')
-			vec_push(result, "0");
-		if (ft_tolower(specs.spec) == 'x')
-			vec_push(result, &specs.spec);
-	}
-	if (!(specs.flags & DASH))
-		padding(result, specs.width, specs.pad_char);
-	if (specs.flags & HASH && !(specs.flags & ZERO) && specs.value)
-	{
-		if (specs.spec == 'o' || ft_tolower(specs.spec) == 'x')
-			vec_push(result, "0");
-		if (ft_tolower(specs.spec) == 'x')
-			vec_push(result, &specs.spec);
-	}
-	*/
 	res = vec_append_strn(result, s, len);
 	if (specs.flags & DASH)
-		padding(result, specs.width, specs.pad_char);
+		padding(result, specs.width - len, specs.pad_char);
 	return (res);
 }
 
