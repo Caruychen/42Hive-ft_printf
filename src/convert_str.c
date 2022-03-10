@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 11:13:57 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/09 10:50:46 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/10 15:37:55 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,18 @@ int	append_char(t_vec *result, t_specs *specs, char c)
 	int	res;
 
 	if (!(specs->flags & DASH))
-		padding(result, specs->width - 1, specs->pad_char);
+	{
+		if (padding(result, specs->width - 1, specs->pad_char) < 0)
+			return (-1);
+	}
 	res = vec_push(result, &c);
+	if (res < 0)
+		return (res);
 	if (specs->flags & DASH)
-		padding(result, specs->width - 1, specs->pad_char);
+	{
+		if (padding(result, specs->width - 1, specs->pad_char) < 0)
+			return (-1);
+	}
 	return (res);
 }
 

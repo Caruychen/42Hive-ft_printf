@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 15:36:18 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/10 12:04:36 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/10 15:38:01 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,14 @@ void	reset_specs(t_specs *specs)
 	specs->sign = 0;
 }
 
-void	padding(t_vec *result, int length, char c)
+int	padding(t_vec *result, int length, char c, int trigger)
 {
+	if (trigger == 0)
+		return (0);
 	while (length-- > 0)
-		vec_push(result, &c);
+	{
+		if (vec_push(result, &c) < 0)
+			return (-1);
+	}
+	return (0);
 }

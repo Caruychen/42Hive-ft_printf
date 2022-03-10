@@ -6,14 +6,14 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 09:48:28 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/08 09:52:06 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/10 15:29:27 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "dispatch.h"
 #include "len_modifiers.h"
 
-int	parse_length(const char **format, t_specs *specs)
+void	parse_length(const char **format, t_specs *specs)
 {
 	int	index;
 
@@ -21,11 +21,12 @@ int	parse_length(const char **format, t_specs *specs)
 	while (index < LEN_FLAG_INDEX_MAX)
 	{
 		if (!(**format == 'h' || **format == 'l' || **format == 'L'))
-			return (specs->length);
+			break ;
 		if (**format == 'L')
 		{
 			(*format)++;
-			return (specs->length = 1);
+			specs->length = 1;
+			break ;
 		}
 		if (!specs->length)
 			specs->length = **format >> 2;
@@ -35,5 +36,4 @@ int	parse_length(const char **format, t_specs *specs)
 		index++;
 		(*format)++;
 	}
-	return (specs->length);
 }
