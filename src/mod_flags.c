@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 21:57:33 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/10 08:43:48 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/10 09:07:19 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	*mod_precision(t_specs specs, size_t src_len, int sign)
 	char	*tmp;
 
 	sign_str = mod_sign(specs, sign);
-	src_len += (specs.flags & HASH && specs.spec == 'o');
+	src_len += (specs.flags & HASH && specs.spec == 'o' && specs.value);
 	src_len += (specs.flags & ZERO && *sign_str);
 	len = (specs.precision > src_len) * (specs.precision - src_len);
 	tmp = ft_strnew(len);
