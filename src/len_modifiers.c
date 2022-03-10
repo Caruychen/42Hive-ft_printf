@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 23:19:45 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/10 10:34:15 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/10 10:39:40 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,28 +31,24 @@ char	*lengthmod_short(t_specs *specs)
 			get_int_base(specs->spec), specs->spec == 'X'));
 }
 
-/*
-static char	*pad_results(t_specs specs, char *src)
+static char	*pad_results(t_specs specs, char *src, int sign)
 {
 	char	*padding;
 	char	*res;
 
-	if (specs->value == 0 && !(specs->flags & HASH) && specs->width && !specs->precision)
+	if (specs.value == 0 && !(specs.flags & HASH) && specs.width && !specs.precision)
 		*src = ' ';
 	padding = mod_width(specs, ft_strlen(src), sign);
-	tmp = res;
-	res = ft_strjoin(padding, res);
-	ft_strdel(&tmp);
+	res = ft_strjoin(padding, src);
+	ft_strdel(&src);
 	ft_strdel(&padding);
+	return (res);
 }
-*/
 
 char	*lengthmod_int(t_specs *specs)
 {
 	int		sign;
 	char	*res;
-	char	*tmp;
-	char	*padding;
 
 	specs->value = va_arg(specs->ap, int);
 	sign = 1 - ((specs->value < 0) * 2);
@@ -61,14 +57,7 @@ char	*lengthmod_int(t_specs *specs)
 	if (specs->is_signed)
 		specs->value *= sign;
 	res = ft_uitoa(specs->value, get_int_base(specs->spec), specs->spec == 'X');
-	if (specs->value == 0 && !(specs->flags & HASH) && specs->width && !specs->precision)
-		*res = ' ';
-	padding = mod_width(*specs, ft_strlen(res), sign);
-	tmp = res;
-	res = ft_strjoin(padding, res);
-	ft_strdel(&tmp);
-	ft_strdel(&padding);
-	return (res);
+	return (pad_results(*specs, res, sign));
 }
 
 char	*lengthmod_long(t_specs *specs)
