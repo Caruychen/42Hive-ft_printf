@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 21:57:33 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/10 10:50:47 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/10 12:18:53 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,14 @@ char	*mod_altform(t_specs specs)
 	char	*res;
 
 	res = ft_strnew(2);
-	if (!(specs.flags & HASH) || specs.is_signed || !specs.value)
+	if (!(specs.flags & HASH) || specs.is_signed
+		|| (!specs.value && specs.spec != 'p'))
 		return (res);
 	*res = '0';
-	if (specs.spec == 'x' || specs.spec == 'X')
+	if (ft_tolower(specs.spec) == 'x')
 		res[1] = specs.spec;
+	else if (specs.spec == 'p')
+		res[1] = 'x';
 	return (res);
 }
 

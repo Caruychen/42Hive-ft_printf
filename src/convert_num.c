@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 11:16:11 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/10 08:53:43 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/10 12:56:25 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 static inline int	is_null_precision(t_specs specs)
 {
 	return (specs.precision_on && !(specs.spec == 'o' && specs.flags & HASH)
-		&& specs.precision == 0 && specs.value == 0 && !specs.width);
+		&& specs.precision == 0 && specs.value == 0 && !specs.width
+		&& specs.spec != 'p');
 }
 
 static int	push_result(t_vec *result, t_specs specs, char *s)
