@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 21:57:33 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/10 09:07:19 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/10 10:16:32 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,26 @@ char	*mod_precision(t_specs specs, size_t src_len, int sign)
 	return (res);
 }
 
-char	*mod_width(t_specs specs, size_t src_len, int sign)
+static char	*prepend_width(t_specs specs, char *src, size_t offset)
 {
 	size_t	len;
 	char	*res;
+	char	*tmp;
+
+	len = (specs.width > offset) * (specs.width - offset);
+	tmp = ft_strnew(len);
+	ft_memset(tmp, ' ', len);
+	res = ft_strjoin(tmp, src);
+	ft_strdel(&tmp);
+	ft_strdel(&src);
+	return (res);
+}
+
+char	*mod_width(t_specs specs, size_t src_len, int sign)
+{
+	char	*res;
 	char	*alt;
 	char	*tmp;
-	size_t	offset;
 	size_t	altlen;
 
 	alt = mod_altform(specs);
@@ -79,16 +92,9 @@ char	*mod_width(t_specs specs, size_t src_len, int sign)
 	}
 	tmp = mod_precision(specs, src_len, sign);
 	res = ft_strjoin(alt, tmp);
-	offset = src_len + ft_strlen(res);
 	ft_strdel(&alt);
 	ft_strdel(&tmp);
 	if (specs.flags & DASH)
 		return (res);
-	len = (specs.width > offset) * (specs.width - offset);
-	tmp = ft_strnew(len);
-	ft_memset(tmp, ' ', len);
-	alt = ft_strjoin(tmp, res);
-	ft_strdel(&tmp);
-	ft_strdel(&res);
-	return (alt);
+	return (prepend_width(specs, res, src_len + ft_strlen(res)));
 }

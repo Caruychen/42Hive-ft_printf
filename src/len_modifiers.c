@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 23:19:45 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/09 23:48:00 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/10 10:34:15 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,22 @@ char	*lengthmod_short(t_specs *specs)
 			get_int_base(specs->spec), specs->spec == 'X'));
 }
 
+/*
+static char	*pad_results(t_specs specs, char *src)
+{
+	char	*padding;
+	char	*res;
+
+	if (specs->value == 0 && !(specs->flags & HASH) && specs->width && !specs->precision)
+		*src = ' ';
+	padding = mod_width(specs, ft_strlen(src), sign);
+	tmp = res;
+	res = ft_strjoin(padding, res);
+	ft_strdel(&tmp);
+	ft_strdel(&padding);
+}
+*/
+
 char	*lengthmod_int(t_specs *specs)
 {
 	int		sign;
@@ -45,6 +61,8 @@ char	*lengthmod_int(t_specs *specs)
 	if (specs->is_signed)
 		specs->value *= sign;
 	res = ft_uitoa(specs->value, get_int_base(specs->spec), specs->spec == 'X');
+	if (specs->value == 0 && !(specs->flags & HASH) && specs->width && !specs->precision)
+		*res = ' ';
 	padding = mod_width(*specs, ft_strlen(res), sign);
 	tmp = res;
 	res = ft_strjoin(padding, res);
