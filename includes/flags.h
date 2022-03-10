@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 16:32:57 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/09 23:42:31 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/10 10:51:06 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ typedef enum e_flags
 	PLUS = 16,
 }	t_flags;
 
-char	*mod_sign(t_specs specs, int sign);
-char	*mod_precision(t_specs specs, size_t src_len, int sign);
-char	*mod_width(t_specs specs, size_t src_len, int sign);
+char	*mod_sign(t_specs specs);
+char	*mod_precision(t_specs specs, size_t src_len);
+char	*mod_width(t_specs specs, size_t src_len);
 
 #endif

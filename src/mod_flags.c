@@ -6,24 +6,28 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 21:57:33 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/10 10:16:32 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/10 10:50:47 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "ft_printf.h"
 
-char	*mod_sign(t_specs specs, int sign)
+char	*mod_sign(t_specs specs)
 {
 	size_t	len;
 	char	*res;
+	char	sign_char;
 
-	len = ((specs.is_signed && (specs.flags & 24 || sign < 0)));
+	sign_char = '+';
+	len = ((specs.is_signed && (specs.flags & 24 || specs.sign < 0)));
 	res = ft_strnew(len);
-	if (specs.flags & SPACE && sign > 0)
-		specs.sign = ' ';
+	if (specs.flags & SPACE && specs.sign > 0)
+		sign_char = ' ';
+	if (specs.sign < 0)
+		sign_char = '-';
 	if (len)
-		*res = specs.sign;
+		*res = sign_char;
 	return (res);
 }
 
@@ -40,14 +44,14 @@ char	*mod_altform(t_specs specs)
 	return (res);
 }
 
-char	*mod_precision(t_specs specs, size_t src_len, int sign)
+char	*mod_precision(t_specs specs, size_t src_len)
 {
 	size_t	len;
 	char	*res;
 	char	*sign_str;
 	char	*tmp;
 
-	sign_str = mod_sign(specs, sign);
+	sign_str = mod_sign(specs);
 	src_len += (specs.flags & HASH && specs.spec == 'o' && specs.value);
 	src_len += (specs.flags & ZERO && *sign_str);
 	len = (specs.precision > src_len) * (specs.precision - src_len);
@@ -74,7 +78,7 @@ static char	*prepend_width(t_specs specs, char *src, size_t offset)
 	return (res);
 }
 
-char	*mod_width(t_specs specs, size_t src_len, int sign)
+char	*mod_width(t_specs specs, size_t src_len)
 {
 	char	*res;
 	char	*alt;
@@ -90,7 +94,7 @@ char	*mod_width(t_specs specs, size_t src_len, int sign)
 		specs.precision = (specs.width > altlen) * (specs.width - altlen);
 		specs.width = 0;
 	}
-	tmp = mod_precision(specs, src_len, sign);
+	tmp = mod_precision(specs, src_len);
 	res = ft_strjoin(alt, tmp);
 	ft_strdel(&alt);
 	ft_strdel(&tmp);

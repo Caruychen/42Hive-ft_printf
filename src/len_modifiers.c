@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 23:19:45 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/10 10:39:40 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/10 10:51:35 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,14 @@ char	*lengthmod_short(t_specs *specs)
 			get_int_base(specs->spec), specs->spec == 'X'));
 }
 
-static char	*pad_results(t_specs specs, char *src, int sign)
+static char	*pad_results(t_specs specs, char *src)
 {
 	char	*padding;
 	char	*res;
 
 	if (specs.value == 0 && !(specs.flags & HASH) && specs.width && !specs.precision)
 		*src = ' ';
-	padding = mod_width(specs, ft_strlen(src), sign);
+	padding = mod_width(specs, ft_strlen(src));
 	res = ft_strjoin(padding, src);
 	ft_strdel(&src);
 	ft_strdel(&padding);
@@ -47,17 +47,14 @@ static char	*pad_results(t_specs specs, char *src, int sign)
 
 char	*lengthmod_int(t_specs *specs)
 {
-	int		sign;
 	char	*res;
 
 	specs->value = va_arg(specs->ap, int);
-	sign = 1 - ((specs->value < 0) * 2);
-	if (sign < 0)
-		specs->sign = '-';
+	specs->sign = 1 - ((specs->value < 0) * 2);
 	if (specs->is_signed)
-		specs->value *= sign;
+		specs->value *= specs->sign;
 	res = ft_uitoa(specs->value, get_int_base(specs->spec), specs->spec == 'X');
-	return (pad_results(*specs, res, sign));
+	return (pad_results(*specs, res));
 }
 
 char	*lengthmod_long(t_specs *specs)

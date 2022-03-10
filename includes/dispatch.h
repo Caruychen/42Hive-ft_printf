@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 11:15:21 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/09 13:45:02 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/10 10:43:21 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ typedef struct s_specs
 	va_list				ap;
 	long				value;
 	char				spec;
-	char				sign;
+	int					sign;
 	unsigned int		length : 3;
 	unsigned int		is_signed : 1;
 	unsigned int		flags: 5;
