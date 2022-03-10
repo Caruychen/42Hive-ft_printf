@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 11:13:37 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/10 12:43:29 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/10 15:45:46 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ static int	append_decimals(t_vec *result, double value, unsigned int precision)
 	len = append_num(result, value);
 	if (len == -1)
 		return (-1);
-	padding(result, precision - len, '0');
+	if (padding(result, precision - len, '0', TRUE) < 0)
+		return (-1);
 	return (result->len);
 }
 
@@ -46,11 +47,18 @@ static int	push_result(t_vec *result, t_vec *vec, t_specs specs)
 {
 	int	res;
 
-	if (!(specs.flags & DASH) && specs.width > vec->len)
-		padding(result, specs.width - vec->len, ' ');
+	if (padding(result, specs.width - vec->len, ' ',
+				!(specs.flags & DASH) && specs.width > vec->len))
+		return (-1);
 	res = vec_append(result, vec);
-	if ((specs.flags & DASH) && specs.width > vec->len)
-		padding(result, specs.width - vec->len, ' ');
+	if (res < 0)
+	{
+		vec_free(vec);
+		return (-1);
+	}
+	if (padding(result, specs.width - vec->len, ' ',
+				(specs.flags & DASH) && specs.width > vec->len))
+		return (-1);
 	vec_free(vec);
 	return (res);
 }

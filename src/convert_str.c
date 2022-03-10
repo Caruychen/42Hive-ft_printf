@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 11:13:57 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/10 15:37:55 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/10 15:44:42 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,13 @@ int	append_char(t_vec *result, t_specs *specs, char c)
 {
 	int	res;
 
-	if (!(specs->flags & DASH))
-	{
-		if (padding(result, specs->width - 1, specs->pad_char) < 0)
-			return (-1);
-	}
+	if (padding(result, specs->width - 1, specs->pad_char, !(specs->flags & DASH)))
+		return (-1);
 	res = vec_push(result, &c);
 	if (res < 0)
 		return (res);
-	if (specs->flags & DASH)
-	{
-		if (padding(result, specs->width - 1, specs->pad_char) < 0)
-			return (-1);
-	}
+	if (padding(result, specs->width - 1, specs->pad_char, specs->flags & DASH))
+		return (-1);
 	return (res);
 }
 
@@ -49,11 +43,13 @@ static int	push_str(t_vec *result, t_specs specs, char *str)
 	length = ft_strlen(str);
 	if (specs.precision_on && length > specs.precision)
 		length = specs.precision;
-	if (!(specs.flags & DASH))
-		padding(result, specs.width - length, specs.pad_char);
+	if (padding(result, specs.width - length, specs.pad_char, !(specs.flags & DASH)) < 0)
+		return (-1);
 	res = vec_append_strn(result, str, length);
-	if (specs.flags & DASH)
-		padding(result, specs.width - length, specs.pad_char);
+	if (res < 0)
+		return (res);
+	if (padding(result, specs.width - length, specs.pad_char, specs.flags & DASH) < 0)
+		return (-1);
 	return (res);
 }
 
