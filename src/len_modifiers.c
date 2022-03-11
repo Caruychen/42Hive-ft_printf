@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 23:19:45 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/11 09:36:09 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/11 15:27:53 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static char	*pad_results(t_specs specs, char *src)
 	char	*res;
 
 	if (specs.value == 0 && !(specs.flags & ZERO)
-		&& !(specs.is_signed && !specs.precision_on)
-		&& specs.width && !specs.precision)
+		&& specs.precision_on && !specs.precision
+		&& specs.width)
 		*src = ' ';
 	padding = mod_width(specs, ft_strlen(src));
 	if (specs.spec == 'p' && !specs.value
