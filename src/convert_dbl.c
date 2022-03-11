@@ -6,14 +6,14 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 11:13:37 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/10 15:47:51 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/11 15:47:11 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "ft_printf.h"
 
-static int	append_num(t_vec *result, double value)
+static int	append_num(t_vec *result, long double value)
 {
 	char	*s;
 	int		len;
@@ -28,7 +28,7 @@ static int	append_num(t_vec *result, double value)
 	return (len);
 }
 
-static int	append_decimals(t_vec *result, double value, unsigned int precision)
+static int	append_decimals(t_vec *result, long double value, unsigned int precision)
 {
 	int	len;
 
@@ -65,7 +65,7 @@ static int	push_result(t_vec *result, t_vec *vec, t_specs specs)
 
 int	conv_dbl(t_vec *result, t_specs *specs)
 {
-	double			value;
+	long double			value;
 	unsigned int	precision;
 	t_vec			vec;
 
