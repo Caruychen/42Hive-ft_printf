@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 11:13:37 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/11 15:47:11 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/11 16:42:19 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ static int	append_num(t_vec *result, long double value)
 	return (len);
 }
 
-static int	append_decimals(t_vec *result, long double value, unsigned int precision)
+static int	append_decimals(t_vec *result, long double value,
+		unsigned int precision)
 {
 	int	len;
 
@@ -66,8 +67,8 @@ static int	push_result(t_vec *result, t_vec *vec, t_specs specs)
 int	conv_dbl(t_vec *result, t_specs *specs)
 {
 	long double			value;
-	unsigned int	precision;
-	t_vec			vec;
+	unsigned int		precision;
+	t_vec				vec;
 
 	if (specs->length == L)
 		value = va_arg(specs->ap, long double);
