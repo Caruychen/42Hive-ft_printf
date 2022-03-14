@@ -6,19 +6,12 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 15:36:18 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/10 15:45:45 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/14 15:52:45 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "vec.h"
-
-int	append_str(t_vec *result, const char *s)
-{
-	if (s == NULL)
-		return (vec_append_str(result, "(null)"));
-	return (vec_append_str(result, s));
-}
+#include "libft.h"
 
 int	get_int_base(const char c)
 {
@@ -53,4 +46,23 @@ int	padding(t_vec *result, int length, char c, int trigger)
 			return (-1);
 	}
 	return (0);
+}
+
+int	read_option(const char **format, t_specs *specs)
+{
+	int	arg;
+
+	if (**format == '*')
+	{
+		(*format)++;
+		arg = va_arg(specs->ap, int);
+		if (!ft_isdigit(**format))
+			return (arg);
+	}
+	arg = ft_atoi(*format);
+	if (**format == '-')
+		(*format)++;
+	while (ft_isdigit(**format))
+		(*format)++;
+	return (arg);
 }
