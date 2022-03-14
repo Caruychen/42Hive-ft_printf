@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_width.c                                      :+:      :+:    :+:   */
+/*   parse_wildcard.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/08 10:07:09 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/14 11:10:40 by cchen            ###   ########.fr       */
+/*   Created: 2022/03/14 10:34:38 by cchen             #+#    #+#             */
+/*   Updated: 2022/03/14 11:31:38 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "ft_printf.h"
+#include "dispatch.h"
+#include "flags.h"
 
-void	parse_width(const char **format, t_specs *specs)
+unsigned int	parse_wildcard(t_specs *specs)
 {
-	if (**format == '*')
+	int	argument;
+
+	argument = va_arg(specs->ap, int);
+	if (argument < 0)
 	{
-		specs->width = parse_wildcard(specs);
-		(*format)++;
-		return ;
+		argument *= -1 * !specs->precision_on;
+		specs->precision_on = 0;
+		specs->flags |= DASH;
+		specs->flags &= ~(ZERO);
+		specs->pad_char = ' ';
 	}
-	specs->width = ft_atoi(*format);
-	while (ft_isdigit(**format))
-		(*format)++;
+	return ((unsigned int) argument);
 }

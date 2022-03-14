@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 18:03:47 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/10 15:36:58 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/14 11:11:43 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,21 @@
 # define TRUE 1
 # define FALSE 0
 
-void	init_specs(t_specs *specs, va_list ap);
-void	reset_specs(t_specs *specs);
-int		append_str(t_vec *result, const char *s);
-int		get_int_base(const char c);
-int		padding(t_vec *result, int length, char c, int trigger);
+void			init_specs(t_specs *specs, va_list ap);
+void			reset_specs(t_specs *specs);
+int				append_str(t_vec *result, const char *s);
+int				get_int_base(const char c);
+int				padding(t_vec *result, int length, char c, int trigger);
 
-int		ft_printf(const char *format, ...);
-int		ft_vasprintf(char **ret, const char *format, va_list ap);
-int		parse(t_vec *result, const char *format, t_specs specs);
-int		parse_conversion(t_vec *result, const char **format, t_specs *specs);
-void	parse_length(const char **format, t_specs *specs);
-void	parse_precision(const char **format, t_specs *specs);
-void	parse_flags(const char **format, t_specs *specs);
-void	parse_width(const char **format, t_specs *specs);
+int				ft_printf(const char *format, ...);
+int				ft_vasprintf(char **ret, const char *format, va_list ap);
+int				parse(t_vec *result, const char *format, t_specs specs);
+int				parse_conversion(t_vec *result, const char **format,
+					t_specs *specs);
+void			parse_length(const char **format, t_specs *specs);
+void			parse_precision(const char **format, t_specs *specs);
+void			parse_flags(const char **format, t_specs *specs);
+void			parse_width(const char **format, t_specs *specs);
+unsigned int	parse_wildcard(t_specs *specs);
 
 #endif
