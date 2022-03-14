@@ -6,14 +6,14 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 11:13:37 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/11 16:42:19 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/14 22:31:41 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "ft_printf.h"
 
-static int	append_num(t_vec *result, long double value)
+static int	append_num(t_vec *vec, long double value)
 {
 	char	*s;
 	int		len;
@@ -22,33 +22,36 @@ static int	append_num(t_vec *result, long double value)
 	if (!s)
 		return (-1);
 	len = ft_strlen(s);
-	if (vec_append_strn(result, s, len) == -1)
+	if (vec_append_strn(vec, s, len) == -1)
 		len = -1;
 	ft_strdel(&s);
 	return (len);
 }
 
-static int	append_decimals(t_vec *result, long double value,
-		unsigned int precision)
+static int	append_decimals(t_vec *vec, long double value,
+		unsigned int precision, t_specs specs)
 {
 	int	len;
 
-	if (vec_push(result, ".") == -1)
+	if ((specs.flags & HASH || !specs.precision_on || specs.precision)
+		&& vec_push(vec, ".") == -1)
 		return (-1);
+	if (specs.precision_on && !specs.precision)
+		return (vec->len);
 	value = (value - (unsigned long) value) * ft_pow(10, precision);
-	len = append_num(result, value);
+	len = append_num(vec, value);
 	if (len == -1)
 		return (-1);
-	if (padding(result, precision - len, '0', TRUE) < 0)
+	if (padding(vec, precision - len, '0', TRUE) < 0)
 		return (-1);
-	return (result->len);
+	return (vec->len);
 }
 
 static int	push_result(t_vec *result, t_vec *vec, t_specs specs)
 {
 	int	res;
 
-	if (padding(result, specs.width - vec->len, ' ',
+	if (padding(result, specs.width - vec->len, specs.pad_char,
 			!(specs.flags & DASH) && specs.width > vec->len))
 		return (-1);
 	res = vec_append(result, vec);
@@ -84,8 +87,6 @@ int	conv_dbl(t_vec *result, t_specs *specs)
 	precision = 6 * !specs->precision_on + specs->precision;
 	value += 0.5 / ft_pow(10, precision);
 	append_num(&vec, value);
-	if (specs->precision_on && !specs->precision)
-		return (push_result(result, &vec, *specs));
-	append_decimals(&vec, value, precision);
+	append_decimals(&vec, value, precision, *specs);
 	return (push_result(result, &vec, *specs));
 }
