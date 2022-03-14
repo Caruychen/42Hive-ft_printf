@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 21:57:33 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/14 16:34:30 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/14 21:49:28 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ static char	*mod_sign(t_specs specs)
 	char	sign_char;
 
 	sign_char = '+';
-	len = ((specs.is_signed && (specs.flags & (SPACE + PLUS)
-					|| specs.sign < 0)));
+	len = (specs.is_signed && specs.value != 0
+			&& (specs.flags & (SPACE + PLUS) || specs.sign < 0));
 	res = ft_strnew(len);
 	if (specs.flags & SPACE && specs.sign > 0)
 		sign_char = ' ';
