@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 21:57:33 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/14 16:22:31 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/14 16:34:30 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static char	*mod_precision(t_specs specs, size_t src_len)
 	return (res);
 }
 
-static char	*prepend_width(t_specs specs, char *src, size_t offset)
+static char	*mod_pre_width(t_specs specs, char *src, size_t offset)
 {
 	size_t	len;
 	char	*res;
@@ -82,7 +82,7 @@ static char	*prepend_width(t_specs specs, char *src, size_t offset)
 	return (res);
 }
 
-char	*mod_width(t_specs specs, size_t src_len)
+char	*mod_flags(t_specs specs, size_t src_len)
 {
 	char	*res;
 	char	*alt;
@@ -104,5 +104,5 @@ char	*mod_width(t_specs specs, size_t src_len)
 	ft_strdel(&tmp);
 	if (specs.flags & DASH)
 		return (res);
-	return (prepend_width(specs, res, src_len + ft_strlen(res)));
+	return (mod_pre_width(specs, res, src_len + ft_strlen(res)));
 }

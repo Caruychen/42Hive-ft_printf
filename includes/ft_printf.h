@@ -6,15 +6,13 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 18:03:47 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/14 16:26:00 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/14 16:28:31 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include <stdarg.h>
-# include "vec.h"
 # include "dispatch.h"
 # include "modifiers.h"
 # include "flags.h"
