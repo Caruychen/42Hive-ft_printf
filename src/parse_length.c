@@ -6,12 +6,12 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 09:48:28 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/10 15:29:27 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/14 16:26:21 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "dispatch.h"
-#include "len_modifiers.h"
+#include "modifiers.h"
 
 void	parse_length(const char **format, t_specs *specs)
 {

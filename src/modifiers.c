@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 23:19:45 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/11 15:27:53 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/14 16:24:40 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static char	*pad_results(t_specs specs, char *src)
 	return (res);
 }
 
-char	*lengthmod_char(t_specs *specs)
+char	*mod_char(t_specs *specs)
 {
 	char	*res;
 
@@ -48,7 +48,7 @@ char	*lengthmod_char(t_specs *specs)
 	return (pad_results(*specs, res));
 }
 
-char	*lengthmod_short(t_specs *specs)
+char	*mod_short(t_specs *specs)
 {
 	char	*res;
 
@@ -61,7 +61,7 @@ char	*lengthmod_short(t_specs *specs)
 	return (pad_results(*specs, res));
 }
 
-char	*lengthmod_int(t_specs *specs)
+char	*mod_int(t_specs *specs)
 {
 	char	*res;
 
@@ -73,7 +73,7 @@ char	*lengthmod_int(t_specs *specs)
 	return (pad_results(*specs, res));
 }
 
-char	*lengthmod_long(t_specs *specs)
+char	*mod_long(t_specs *specs)
 {
 	char	*res;
 

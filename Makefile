@@ -6,7 +6,7 @@
 #    By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 15:25:42 by cchen             #+#    #+#              #
-#    Updated: 2022/03/14 15:52:21 by cchen            ###   ########.fr        #
+#    Updated: 2022/03/14 16:26:45 by cchen            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ SRCS := ./src/$(EXE).c \
 	./src/convert_ptr.c \
 	./src/convert_dbl.c \
 	./src/utils.c \
-	./src/len_modifiers.c \
+	./src/modifiers.c \
 	./src/mod_flags.c
 OBJS := $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 HEADER := $(SRC_DIR)/$(EXE).h

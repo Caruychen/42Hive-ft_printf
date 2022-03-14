@@ -6,21 +6,22 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 21:57:33 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/10 12:18:53 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/14 16:22:31 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "ft_printf.h"
 
-char	*mod_sign(t_specs specs)
+static char	*mod_sign(t_specs specs)
 {
 	size_t	len;
 	char	*res;
 	char	sign_char;
 
 	sign_char = '+';
-	len = ((specs.is_signed && (specs.flags & 24 || specs.sign < 0)));
+	len = ((specs.is_signed && (specs.flags & (SPACE + PLUS)
+					|| specs.sign < 0)));
 	res = ft_strnew(len);
 	if (specs.flags & SPACE && specs.sign > 0)
 		sign_char = ' ';
@@ -31,7 +32,7 @@ char	*mod_sign(t_specs specs)
 	return (res);
 }
 
-char	*mod_altform(t_specs specs)
+static char	*mod_altform(t_specs specs)
 {
 	char	*res;
 
@@ -47,7 +48,7 @@ char	*mod_altform(t_specs specs)
 	return (res);
 }
 
-char	*mod_precision(t_specs specs, size_t src_len)
+static char	*mod_precision(t_specs specs, size_t src_len)
 {
 	size_t	len;
 	char	*res;
