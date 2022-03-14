@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 10:07:09 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/14 11:10:40 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/14 14:09:20 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	parse_width(const char **format, t_specs *specs)
 	{
 		specs->width = parse_wildcard(specs);
 		(*format)++;
-		return ;
+		if (!ft_isdigit(**format))
+			return ;
 	}
 	specs->width = ft_atoi(*format);
 	while (ft_isdigit(**format))
