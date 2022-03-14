@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 10:07:09 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/14 15:51:58 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/14 16:04:55 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	parse_width(const char **format, t_specs *specs)
 		specs->flags |= DASH;
 		specs->flags &= ~(ZERO);
 		specs->pad_char = ' ';
+		arg *= -1;
 	}
-	specs->width = (unsigned int) arg * (1 - 2 * (arg < 0));
+	specs->width = (unsigned int) arg;
 }
