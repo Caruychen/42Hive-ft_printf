@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   len_modifiers.c                                    :+:      :+:    :+:   */
+/*   modifiers.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 23:19:45 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/14 16:35:44 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/14 21:57:20 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static char	*pad_results(t_specs specs, char *src)
 	if (specs.value == 0 && !(specs.flags & ZERO)
 		&& specs.precision_on && !specs.precision
 		&& specs.width)
-		*src = ' ';
+		*src = '\0';
 	padding = mod_flags(specs, ft_strlen(src));
 	if (specs.spec == 'p' && !specs.value
 		&& specs.precision_on && !specs.precision)
