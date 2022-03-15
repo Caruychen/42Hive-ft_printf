@@ -6,7 +6,7 @@
 #    By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/01 15:25:03 by cchen             #+#    #+#              #
-#    Updated: 2022/03/15 19:32:51 by cchen            ###   ########.fr        #
+#    Updated: 2022/03/15 19:34:02 by cchen            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CFLAGS := -Wall -Werror -Wextra
 INCLUDES := -I./includes -I./includes/libft
 
 SRC_DIR := .
-OBJ_DIR := ./
+OBJ_DIR := .
 SUB_DIR := $(shell find $(SRC_DIR) -type d -mindepth 1 -exec basename {} \;) 
 SRCS := ./ft_atoi.c \
 	./ft_bzero.c \
