@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 11:13:37 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/15 14:42:32 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/15 15:08:36 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ static int	append_num(t_vec *vec, long double value)
 static int	append_decimals(t_vec *vec, long double value,
 		unsigned int precision, t_specs specs)
 {
-	int	len;
+	size_t		len;
+	char		*s;
 
 	if ((specs.flags & HASH || !specs.precision_on || specs.precision)
 		&& vec_push(vec, ".") == -1)
@@ -39,11 +40,15 @@ static int	append_decimals(t_vec *vec, long double value,
 	if (specs.precision_on && !specs.precision)
 		return (vec->len);
 	value = (value - (unsigned long) value) * ft_pow(10, precision);
-	len = append_num(vec, value);
-	if (len == -1)
-		return (-1);
-	if (padding(vec, precision - len, '0', TRUE) < 0)
-		return (-1);
+	s = ft_ultoa((unsigned long) value, 10, FALSE);
+	len = ft_strlen(s);
+	if (precision > len)
+	{
+		padding(vec, precision - len, '0', TRUE);
+		precision -= precision - len;
+	}
+	vec_append_strn(vec, s, len);
+	ft_strdel(&s);
 	return (vec->len);
 }
 
