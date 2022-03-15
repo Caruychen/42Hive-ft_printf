@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 09:41:22 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/10 16:06:58 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/15 13:59:40 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int	parse_conversion(t_vec *result, const char **format, t_specs *specs)
 	t_dispatcher	dispatch;
 
 	specs->spec = *(*format)++;
+	specs->is_signed = (specs->spec == 'i' || specs->spec == 'd'
+			|| specs->spec == 'f');
 	dispatch = g_dispatcher[dispatch_index(specs->spec)];
 	if (!dispatch)
 	{

@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 11:13:37 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/14 22:31:41 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/15 14:11:52 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,14 @@ static int	append_decimals(t_vec *vec, long double value,
 
 static int	push_result(t_vec *result, t_vec *vec, t_specs specs)
 {
-	int	res;
+	int		res;
+	char	*s;
+	size_t	offset;
 
-	if (padding(result, specs.width - vec->len, specs.pad_char,
+	s = mod_sign(specs);
+	offset = ft_strlen(s);
+	vec_append_strn(result, s, offset);
+	if (padding(result, specs.width - vec->len - offset, specs.pad_char,
 			!(specs.flags & DASH) && specs.width > vec->len))
 		return (-1);
 	res = vec_append(result, vec);
@@ -77,13 +82,11 @@ int	conv_dbl(t_vec *result, t_specs *specs)
 		value = va_arg(specs->ap, long double);
 	else
 		value = va_arg(specs->ap, double);
+	specs->sign = 1 - 2 * (value < 0);
+	if (value < 0)
+		value *= -1;
 	if (vec_new(&vec, 1, sizeof(char)) == -1)
 		return (-1);
-	if (value < 0)
-	{
-		vec_push(&vec, "-");
-		value *= -1;
-	}
 	precision = 6 * !specs->precision_on + specs->precision;
 	value += 0.5 / ft_pow(10, precision);
 	append_num(&vec, value);

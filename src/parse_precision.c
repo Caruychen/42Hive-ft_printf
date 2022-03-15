@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 09:52:57 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/14 15:51:45 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/15 13:49:56 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,5 @@ void	parse_precision(const char **format, t_specs *specs)
 	if (arg < 0)
 		return ;
 	specs->precision_on = 1;
-	specs->flags &= ~(ZERO);
-	specs->pad_char = ' ';
 	specs->precision = (unsigned int) arg;
 }

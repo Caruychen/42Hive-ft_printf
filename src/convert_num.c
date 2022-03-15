@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 11:16:11 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/10 15:42:08 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/15 13:58:57 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,11 @@ int	conv_num(t_vec *result, t_specs *specs)
 	char	spec;
 
 	spec = specs->spec;
-	specs->is_signed = (spec == 'i' || spec == 'd');
+	if (specs->precision_on)
+	{
+		specs->flags &= ~(ZERO);
+		specs->pad_char = ' ';
+	}
 	s = g_modifier[specs->length](specs);
 	if (!s)
 		return (-1);

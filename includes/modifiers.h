@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 16:25:19 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/14 16:25:44 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/15 13:55:11 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,7 @@ static const t_modifier		g_modifier[6] = {
 	mod_long,
 	mod_char
 };
+
+char	*mod_sign(t_specs specs);
 
 #endif

@@ -6,14 +6,14 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 21:57:33 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/14 23:11:41 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/15 13:54:46 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "ft_printf.h"
 
-static char	*mod_sign(t_specs specs)
+char	*mod_sign(t_specs specs)
 {
 	size_t	len;
 	char	*res;
