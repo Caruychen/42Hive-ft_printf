@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 11:13:37 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/15 16:15:02 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/15 19:24:08 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	conv_dbl(t_vec *result, t_specs *specs)
 		value = va_arg(specs->ap, long double);
 	else
 		value = va_arg(specs->ap, double);
-	specs->sign = 1 - 2 * (value < 0);
+	specs->sign = 1 - 2 * ((1 / value) < 0);
 	if (value < 0)
 		value *= -1;
 	if (vec_new(&vec, 1, sizeof(char)) == -1)
