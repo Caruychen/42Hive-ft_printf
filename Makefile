@@ -6,7 +6,7 @@
 #    By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 15:25:42 by cchen             #+#    #+#              #
-#    Updated: 2022/03/15 15:30:23 by cchen            ###   ########.fr        #
+#    Updated: 2022/03/15 16:16:40 by cchen            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,8 @@ SRCS := ./src/$(EXE).c \
 	./src/utils.c \
 	./src/modifiers.c \
 	./src/mod_flags.c \
-	./src/mod_doubles.c
+	./src/mod_doubles.c \
+	./src/rounding.c
 OBJS := $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 HEADER := $(SRC_DIR)/$(EXE).h
 

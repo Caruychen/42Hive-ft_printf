@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 11:13:37 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/15 16:04:18 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/15 16:15:02 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,18 +68,6 @@ static int	push_result(t_vec *result, t_vec *vec, t_specs specs)
 		return (-1);
 	vec_free(vec);
 	return (res);
-}
-
-static long double	rounding(long double value, unsigned int precision)
-{
-	int				is_odd;
-	long double		pow;
-
-	pow = (long double) ft_pow(10, precision);
-	is_odd = (int) ft_fmod(value * pow, 2) % 2;
-	if (!is_odd && (int)(value * pow * 10.0L) % 10 == 5)
-		return (value);
-	return (value + 0.5L / pow);
 }
 
 int	conv_dbl(t_vec *result, t_specs *specs)
