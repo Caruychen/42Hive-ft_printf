@@ -6,7 +6,7 @@
 #    By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/01 15:25:03 by cchen             #+#    #+#              #
-#    Updated: 2022/03/15 20:57:17 by cchen            ###   ########.fr        #
+#    Updated: 2022/03/15 20:59:10 by cchen            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,36 +69,36 @@ SRCS := ./ft_atoi.c \
 	./ft_strdelarray.c \
 	./ft_strdup.c \
 	./ft_strequ.c \
-	ft_strjoin.c \
-	ft_strlcat.c \
-	ft_strlen.c \
-	ft_strmap.c \
-	ft_strmapi.c \
-	ft_strncat.c \
-	ft_strncmp.c \
-	ft_strncpy.c \
-	ft_strnequ.c \
-	ft_strnew.c \
-	ft_strnstr.c \
-	ft_strrchr.c \
-	ft_strsplit.c \
-	ft_strstr.c \
-	ft_strsub.c \
-	ft_strtrim.c \
-	ft_tolower.c \
-	ft_toupper.c \
-	ft_uitoa.c \
-	ft_ultoa.c \
-	get_next_line.c \
-	vec_append.c \
-	vec_append_str.c \
-	vec_append_strn.c \
-	vec_copy.c \
-	vec_free.c \
-	vec_from.c \
-	vec_new.c \
-	vec_push.c \
-	vec_resize.c
+	./ft_strjoin.c \
+	./ft_strlcat.c \
+	./ft_strlen.c \
+	./ft_strmap.c \
+	./ft_strmapi.c \
+	./ft_strncat.c \
+	./ft_strncmp.c \
+	./ft_strncpy.c \
+	./ft_strnequ.c \
+	./ft_strnew.c \
+	./ft_strnstr.c \
+	./ft_strrchr.c \
+	./ft_strsplit.c \
+	./ft_strstr.c \
+	./ft_strsub.c \
+	./ft_strtrim.c \
+	./ft_tolower.c \
+	./ft_toupper.c \
+	./ft_uitoa.c \
+	./ft_ultoa.c \
+	./get_next_line.c \
+	./vec_append.c \
+	./vec_append_str.c \
+	./vec_append_strn.c \
+	./vec_copy.c \
+	./vec_free.c \
+	./vec_from.c \
+	./vec_new.c \
+	./vec_push.c \
+	./vec_resize.c
 OBJS := $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 .PHONY: all clean fclean re
