@@ -6,7 +6,7 @@
 #    By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 15:25:42 by cchen             #+#    #+#              #
-#    Updated: 2022/03/15 16:16:40 by cchen            ###   ########.fr        #
+#    Updated: 2022/03/15 22:07:57 by cchen            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,6 @@ SRCS := ./src/$(EXE).c \
 	./src/mod_doubles.c \
 	./src/rounding.c
 OBJS := $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
-HEADER := $(SRC_DIR)/$(EXE).h
 
 LIB_DIR := libft
 LIBFT := $(addprefix $(LIB_DIR), libft.a)
