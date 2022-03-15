@@ -6,7 +6,7 @@
 /*   By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 11:13:37 by cchen             #+#    #+#             */
-/*   Updated: 2022/03/15 15:08:36 by cchen            ###   ########.fr       */
+/*   Updated: 2022/03/15 16:04:18 by cchen            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,29 +52,11 @@ static int	append_decimals(t_vec *vec, long double value,
 	return (vec->len);
 }
 
-static int	mod_results(t_vec *result, t_vec *vec, t_specs specs)
-{
-	char	*s;
-	size_t	offset;
-
-	s = mod_sign(specs);
-	offset = ft_strlen(s);
-	if (specs.flags & ZERO && vec_append_strn(result, s, offset) < 0)
-		return (-1);
-	if (padding(result, specs.width - vec->len - offset, specs.pad_char,
-			!(specs.flags & DASH) && specs.width > vec->len))
-		return (-1);
-	if (!(specs.flags & ZERO) && vec_append_strn(result, s, offset) < 0)
-		return (-1);
-	ft_strdel(&s);
-	return (0);
-}
-
 static int	push_result(t_vec *result, t_vec *vec, t_specs specs)
 {
 	int		res;
 
-	mod_results(result, vec, specs);
+	mod_doubles(result, vec, specs);
 	res = vec_append(result, vec);
 	if (res < 0)
 	{
@@ -86,6 +68,18 @@ static int	push_result(t_vec *result, t_vec *vec, t_specs specs)
 		return (-1);
 	vec_free(vec);
 	return (res);
+}
+
+static long double	rounding(long double value, unsigned int precision)
+{
+	int				is_odd;
+	long double		pow;
+
+	pow = (long double) ft_pow(10, precision);
+	is_odd = (int) ft_fmod(value * pow, 2) % 2;
+	if (!is_odd && (int)(value * pow * 10.0L) % 10 == 5)
+		return (value);
+	return (value + 0.5L / pow);
 }
 
 int	conv_dbl(t_vec *result, t_specs *specs)
@@ -104,7 +98,7 @@ int	conv_dbl(t_vec *result, t_specs *specs)
 	if (vec_new(&vec, 1, sizeof(char)) == -1)
 		return (-1);
 	precision = 6 * !specs->precision_on + specs->precision;
-	value += 0.5 / ft_pow(10, precision);
+	value = rounding(value, precision);
 	append_num(&vec, value);
 	append_decimals(&vec, value, precision, *specs);
 	return (push_result(result, &vec, *specs));
