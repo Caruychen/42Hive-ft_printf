@@ -6,7 +6,7 @@
 #    By: cchen <cchen@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/15 15:25:42 by cchen             #+#    #+#              #
-#    Updated: 2022/03/15 22:07:57 by cchen            ###   ########.fr        #
+#    Updated: 2022/03/16 09:21:50 by cchen            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,8 +46,8 @@ LIB_OBJS = $(shell find $(LIB_DIR) -type f | grep -E "\.o$$")
 
 all: $(NAME)
 
-$(NAME): $(OBJ_DIR) $(OBJS) $(LIBFT)
-	ar rcs $@ $(OBJS) $(LIB_OBJS)
+$(NAME): $(OBJ_DIR) $(LIBFT) $(OBJS) 
+	@ar rcs $(@) $(OBJS) $(LIB_OBJS)
 
 $(OBJ_DIR):
 	mkdir -p $(@)
